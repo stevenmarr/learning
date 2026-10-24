@@ -1,6 +1,6 @@
 'use strict';
 const { buildTrack } = require('../../lib/trackContent');
-const { fmt, q, ans, mcPool, G } = require('../../helpers');
+const { fmt, q, ans, mcPool, G , qty} = require('../../helpers');
 const { byId: reg } = require('../registry');
 
 const units = [
@@ -20,25 +20,25 @@ $$v = v_0 + at, \qquad x = x_0 + v_0 t + \tfrac12 at^2, \qquad v^2 = v_0^2 + 2a(
       { id: 'phy-u1-vf', title: 'Final velocity', kind: 'numeric',
         gen(r) {
           const v0 = r.step(0, 10, 1), a = r.step(1, 4, 0.5), t = r.step(2, 8, 1);
-          return { prompt: String.raw`An object has initial velocity $v_0=${q(v0,'m/s')}$ and constant acceleration $a=${q(a,'m/s^2')}$ for time $t=${q(t,'s')}$. Find final velocity $v$. Enter $v$ in m/s.`, answers: [ans('v', 'v', v0 + a * t, 'm/s')], hints: [String.raw`$v=v_0+at$.`], solution: String.raw`<p>$v=${fmt(v0+a*t)}\ \\text{m/s}$</p>` };
+          return { prompt: String.raw`An object has initial velocity $v_0=${qty(v0,'m/s')} and constant acceleration $a=${qty(a,'m/s²')} for time $t=${qty(t,'s')}. Find final velocity $v$. Enter $v$ in m/s.`, answers: [ans('v', 'v', v0 + a * t, 'm/s')], hints: [String.raw`$v=v_0+at$.`], solution: String.raw`<p>$v=${fmt(v0+a*t)}\ \\text{m/s}$</p>` };
         } },
       { id: 'phy-u1-x', title: 'Displacement under constant a', kind: 'numeric',
         gen(r) {
           const v0 = r.step(0, 8, 1), a = r.step(1, 3, 0.5), t = r.step(2, 6, 1);
           const x = v0 * t + 0.5 * a * t * t;
-          return { prompt: String.raw`From rest-ish: $v_0=${q(v0,'m/s')}$, $a=${q(a,'m/s^2')}$, $t=${q(t,'s')}$. Displacement $x$? (use $x=v_0t+\\frac12 at^2$).`, answers: [ans('x', 'x', x, 'm')], hints: [String.raw`$x=v_0 t + \\frac12 a t^2$.`], solution: String.raw`<p>$x=${fmt(x)}\\ \\text{m}$</p>` };
+          return { prompt: String.raw`From rest-ish: $v_0=${qty(v0,'m/s')}, $a=${qty(a,'m/s²')}, $t=${qty(t,'s')}. Displacement $x$? (use $x=v_0t+\\frac12 at^2$).`, answers: [ans('x', 'x', x, 'm')], hints: [String.raw`$x=v_0 t + \\frac12 a t^2$.`], solution: String.raw`<p>$x=${fmt(x)}\\ \\text{m}$</p>` };
         } },
       { id: 'phy-u1-v2', title: 'Speed from distance', kind: 'numeric',
         gen(r) {
           const v0 = r.pick([0, 2, 4]), a = r.pick([2, 3, 4]), dx = r.pick([8, 9, 18, 32]);
           const v2 = v0 * v0 + 2 * a * dx;
-          return { prompt: String.raw`$v_0=${q(v0,'m/s')}$, $a=${q(a,'m/s^2')}$, $\\Delta x=${q(dx,'m')}$. Find $v^2$ (enter $v^2$ numerically).`, answers: [ans('v2', 'v^2', v2, 'm²/s²')], hints: [String.raw`$v^2=v_0^2+2a\\Delta x$.`], solution: String.raw`<p>$v^2=${fmt(v2)}$</p>` };
+          return { prompt: String.raw`$v_0=${qty(v0,'m/s')}, $a=${qty(a,'m/s²')}, $\\Delta x=${qty(dx,'m')}. Find $v^2$ (enter $v^2$ numerically).`, answers: [ans('v2', 'v^2', v2, 'm²/s²')], hints: [String.raw`$v^2=v_0^2+2a\\Delta x$.`], solution: String.raw`<p>$v^2=${fmt(v2)}$</p>` };
         } },
       { id: 'phy-u1-fall', title: 'Free-fall time', kind: 'numeric',
         gen(r) {
           const h = r.pick([5, 10, 20, 45]);
           const t = Math.sqrt(2 * h / G);
-          return { prompt: String.raw`Dropped from rest through $${q(h,'m')}$. Time to fall? Use $g=9.81$, $h=\\frac12 gt^2$.`, answers: [ans('t', 't', t, 's')], hints: [String.raw`$t=\\sqrt{2h/g}$.`], solution: String.raw`<p>$t=${fmt(t)}\\ \\text{s}$</p>` };
+          return { prompt: String.raw`Dropped from rest through $${qty(h,'m')}. Time to fall? Use $g=9.81$, $h=\\frac12 gt^2$.`, answers: [ans('t', 't', t, 's')], hints: [String.raw`$t=\\sqrt{2h/g}$.`], solution: String.raw`<p>$t=${fmt(t)}\\ \\text{s}$</p>` };
         } },
       { id: 'phy-u1-mc', title: 'Concept check: kinematics', kind: 'mc',
         gen: mcPool([
@@ -62,18 +62,18 @@ $$v = v_0 + at, \qquad x = x_0 + v_0 t + \tfrac12 at^2, \qquad v^2 = v_0^2 + 2a(
       { id: 'phy-u2-a', title: 'a from net force', kind: 'numeric',
         gen(r) {
           const m = r.step(2, 10, 1), F = r.step(6, 40, 2);
-          return { prompt: String.raw`A net force of ${q(F,'N')}$ acts on a mass of ${q(m,'kg')}$. Find the acceleration $a=F/m$. Enter $a$ in m/s².`, answers: [ans('a', 'a', F / m, 'm/s²')], hints: [String.raw`$a=F/m$.`], solution: String.raw`<p>$a=${fmt(F/m)}$</p>` };
+          return { prompt: String.raw`A net force of ${qty(F,'N')} acts on a mass of ${qty(m,'kg')}. Find the acceleration $a=F/m$. Enter $a$ in m/s².`, answers: [ans('a', 'a', F / m, 'm/s²')], hints: [String.raw`$a=F/m$.`], solution: String.raw`<p>$a=${fmt(F/m)}$</p>` };
         } },
       { id: 'phy-u2-weight', title: 'Weight', kind: 'numeric',
         gen(r) {
           const m = r.step(3, 80, 1);
-          return { prompt: String.raw`An object has mass ${q(m,'kg')}$. Find its weight on Earth using $g=9.81\\ \mathrm{m/s^2}$. Enter weight in newtons.`, answers: [ans('W', 'W', m * G, 'N')], hints: ['W=mg'], solution: String.raw`<p>$W=${fmt(m*G)}$</p>` };
+          return { prompt: String.raw`An object has mass ${qty(m,'kg')}. Find its weight on Earth using $g=9.81\\ \mathrm{m/s^2}$. Enter weight in newtons.`, answers: [ans('W', 'W', m * G, 'N')], hints: ['W=mg'], solution: String.raw`<p>$W=${fmt(m*G)}$</p>` };
         } },
       { id: 'phy-u2-net', title: 'Net force two pulls', kind: 'numeric',
         gen(r) {
           const F1 = r.int(5, 20), F2 = r.int(1, 10), m = r.int(2, 5);
           const a = (F1 - F2) / m;
-          return { prompt: String.raw`Rightward $${q(F1,'N')}$, leftward $${q(F2,'N')}$, $m=${q(m,'kg')}$. Acceleration to the right?`, answers: [ans('a', 'a', a, 'm/s²')], hints: ['Net = F1−F2, then /m.'], solution: String.raw`<p>$a=${fmt(a)}$</p>` };
+          return { prompt: String.raw`Rightward $${qty(F1,'N')}, leftward $${qty(F2,'N')}, $m=${qty(m,'kg')}. Acceleration to the right?`, answers: [ans('a', 'a', a, 'm/s²')], hints: ['Net = F1−F2, then /m.'], solution: String.raw`<p>$a=${fmt(a)}$</p>` };
         } },
       { id: 'phy-u2-mc', title: 'Concept check: Newton', kind: 'mc',
         gen: mcPool([
@@ -97,18 +97,18 @@ $$v = v_0 + at, \qquad x = x_0 + v_0 t + \tfrac12 at^2, \qquad v^2 = v_0^2 + 2a(
       { id: 'phy-u3-K', title: 'Kinetic energy', kind: 'numeric',
         gen(r) {
           const m = r.step(1, 5, 0.5), v = r.step(2, 10, 1);
-          return { prompt: String.raw`A mass $m=${q(m,'kg')}$ moves at speed $v=${q(v,'m/s')}$. Find kinetic energy $K=\\tfrac12 mv^2$. Enter $K$ in joules.`, answers: [ans('K', 'K', 0.5 * m * v * v, 'J')], hints: [String.raw`$K=\\frac12 mv^2$.`], solution: String.raw`<p>$K=${fmt(0.5*m*v*v)}$</p>` };
+          return { prompt: String.raw`A mass $m=${qty(m,'kg')} moves at speed $v=${qty(v,'m/s')}. Find kinetic energy $K=\\tfrac12 mv^2$. Enter $K$ in joules.`, answers: [ans('K', 'K', 0.5 * m * v * v, 'J')], hints: [String.raw`$K=\\frac12 mv^2$.`], solution: String.raw`<p>$K=${fmt(0.5*m*v*v)}$</p>` };
         } },
       { id: 'phy-u3-W', title: 'Work by constant force', kind: 'numeric',
         gen(r) {
           const F = r.int(5, 20), dx = r.int(2, 10);
-          return { prompt: String.raw`A constant force ${q(F,'N')}$ acts in the direction of a displacement ${q(dx,'m')}$. Find the work $W=F\\,\\Delta x$. Enter $W$ in joules.`, answers: [ans('W', 'W', F * dx, 'J')], hints: ['W=F Δx when aligned.'], solution: String.raw`<p>$W=${F*dx}$</p>` };
+          return { prompt: String.raw`A constant force ${qty(F,'N')} acts in the direction of a displacement ${qty(dx,'m')}. Find the work $W=F\\Delta x$. Enter $W$ in joules.`, answers: [ans('W', 'W', F * dx, 'J')], hints: ['W=F Δx when aligned.'], solution: String.raw`<p>$W=${F*dx}$</p>` };
         } },
       { id: 'phy-u3-p', title: '1D inelastic stick', kind: 'numeric',
         gen(r) {
           const m1 = r.pick([2, 3, 4]), v1 = r.pick([3, 4, 6]), m2 = r.pick([1, 2, 3]);
           const vf = (m1 * v1) / (m1 + m2);
-          return { prompt: String.raw`$m_1=${q(m1,'kg')}$ at $${q(v1,'m/s')}$ sticks to $m_2=${q(m2,'kg')}$ at rest. Final speed?`, answers: [ans('vf', 'v_f', vf, 'm/s')], hints: ['Momentum: m1 v1 = (m1+m2) vf.'], solution: String.raw`<p>$v_f=${fmt(vf)}$</p>` };
+          return { prompt: String.raw`$m_1=${qty(m1,'kg')} at $${qty(v1,'m/s')} sticks to $m_2=${qty(m2,'kg')} at rest. Final speed?`, answers: [ans('vf', 'v_f', vf, 'm/s')], hints: ['Momentum: m1 v1 = (m1+m2) vf.'], solution: String.raw`<p>$v_f=${fmt(vf)}$</p>` };
         } },
       { id: 'phy-u3-mc', title: 'Concept check: energy/momentum', kind: 'mc',
         gen: mcPool([
@@ -139,7 +139,7 @@ $$\\gamma = \\frac{1}{\\sqrt{1-v^2/c^2}}$$
       { id: 'phy-u4-dilate', title: 'Time dilation', kind: 'numeric',
         gen(r) {
           const t0 = r.pick([1, 2, 4]), frac = 0.6, g = 1.25, t = g * t0;
-          return { prompt: String.raw`Proper time $\\Delta t_0=${q(t0,'\\mu s')}$ at $v=0.6c$ ($\\gamma=1.25$). Lab time $\\Delta t$?`, answers: [ans('t', '\\Delta t', t, 'µs')], hints: ['Δt = γ Δt0'], solution: String.raw`<p>$\\Delta t=${fmt(t)}$</p>` };
+          return { prompt: String.raw`Proper time $\\Delta t_0=${qty(t0,'\µs')} at $v=0.6c$ ($\\gamma=1.25$). Lab time $\\Delta t$?`, answers: [ans('t', '\\Delta t', t, 'µs')], hints: ['Δt = γ Δt0'], solution: String.raw`<p>$\\Delta t=${fmt(t)}$</p>` };
         } },
       { id: 'phy-u4-mc', title: 'Concept check: SR', kind: 'mc',
         gen: mcPool([

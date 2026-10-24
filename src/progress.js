@@ -171,9 +171,11 @@ function pickProblem(userId, unitNum, excludeId, skillKey) {
   const u = skillKey ? C.toolkitByKey.get(skillKey) : C.units[unitNum - 1];
   const ts = typeScores(userId);
   const scored = u.problems.map((p) => ({ id: p.id, s: ts[p.id] ? ts[p.id].score : -1, r: Math.random() }));
-  const pool = scored.filter((x) => x.id !== excludeId);
+  let pool = scored.filter((x) => excludeId && x.id !== excludeId);
+  // Units with a single problem type must still allow "next" (new seed, same type).
+  if (!pool.length) pool = scored.slice();
+  if (!pool.length) throw new Error(`No problems available for unit ${unitNum}${typeof trackId !== 'undefined' ? ' track '+trackId : ''}`);
   pool.sort((a, b) => a.s - b.s || a.r - b.r);
-  // a little randomness among the weakest few
   const weakest = pool.filter((x) => x.s <= pool[0].s + 0.25).slice(0, 3);
   return weakest[Math.floor(Math.random() * weakest.length)].id;
 }

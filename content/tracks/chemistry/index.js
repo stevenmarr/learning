@@ -1,6 +1,6 @@
 'use strict';
 const { buildTrack } = require('../../lib/trackContent');
-const { fmt, q, ans, mcPool } = require('../../helpers');
+const { fmt, q, ans, mcPool , qty} = require('../../helpers');
 const { byId: reg } = require('../registry');
 
 const units = [
@@ -8,25 +8,35 @@ const units = [
     num: 1, slug: 'atoms-moles', title: 'Atoms, Moles & Molar Mass',
     blurb: 'Atomic identity, Avogadro’s number, and converting grams ↔ moles — the counting unit of chemistry.',
     lesson: String.raw`
-<h2>Why this unit matters</h2>
-<p>Atoms are counted in <strong>moles</strong>: $1\\ \\mathrm{mol}$ contains $N_A\\approx6.022\\times10^{23}$ entities. <strong>Molar mass</strong> $M$ (g/mol) comes from the atomic/molecular masses on the periodic table.</p>
-$$n = \\frac{m}{M}, \\qquad m = nM$$
-<p>Read $n$ as “moles of substance.” Water $H_2O$ is about $18\\ \\mathrm{g/mol}$: 18 g is one mole of water molecules.</p>
+<h2>Learning goals</h2>
+<ul>
+<li>Connect grams, moles, and molar mass with $n=m/M$.</li>
+<li>Keep units visible in every step.</li>
+<li>Estimate whether an answer size makes sense.</li>
+</ul>
+<h2>Hook</h2>
+<p>Recipes on a farm and recipes in a flask both need a fair way to count “how much stuff” when pieces are tiny — that count is the <strong>mole</strong>.</p>
+<h2>Intuition</h2>
+<p>Molar mass $M$ tells you how many grams weigh one mole. If a bag is heavier, it holds more moles of that substance.</p>
+<h2>Formal</h2>
+<p>$n = m/M$ with $m$ in grams and $M$ in g/mol. Rearrange: $m=nM$.</p>
 <div class="example"><h3>Worked example</h3>
-<p>$44\\ \\mathrm{g}$ of $\\mathrm{CO_2}$ ($M=44\\ \\mathrm{g/mol}$) is $n=1.0\\ \\mathrm{mol}$.</p></div>
-<ul class="takeaways"><li>Mole = counting unit.</li><li>$n=m/M$.</li><li>Formulas tell atom ratios in a compound.</li></ul>`,
+<p>$36\ \text{g}$ of a substance with $M=18\ \text{g/mol}$: $n=36/18=2\ \text{mol}$.</p></div>
+<div class="tip"><strong>Common mistake:</strong> dividing molar mass by mass ($M/m$) instead of $m/M$.</div>
+<ul class="takeaways"><li>Mole is a counting unit.</li><li>$n=m/M$.</li><li>Track g vs g/mol vs mol.</li></ul>
+`,
     problems: [
       { id: 'chem-u1-n', title: 'Grams to moles', kind: 'numeric',
         gen(r) {
           const M = r.pick([18, 28, 32, 44, 58.5]);
           const g = r.pick([M, 2 * M, 0.5 * M, 3 * M]);
-          return { prompt: String.raw`$${q(g,'g')}$ of substance with $M=${q(M,'g/mol')}$. Moles?`, answers: [ans('n', 'n', g / M, 'mol')], hints: ['n=m/M'], solution: String.raw`<p>$n=${fmt(g/M)}$</p>` };
+          return { prompt: String.raw`$${qty(g,'g')} of substance with $M=${qty(M,'g/mol')}. Moles?`, answers: [ans('n', 'n', g / M, 'mol')], hints: ['n=m/M'], solution: String.raw`<p>$n=${fmt(g/M)}$</p>` };
         } },
       { id: 'chem-u1-m', title: 'Moles to grams', kind: 'numeric',
         gen(r) {
           const M = r.pick([18, 40, 44, 98]);
           const n = r.pick([0.5, 1, 2, 2.5]);
-          return { prompt: String.raw`$n=${q(n,'mol')}$, $M=${q(M,'g/mol')}$. Mass?`, answers: [ans('m', 'm', n * M, 'g')], hints: ['m=nM'], solution: String.raw`<p>$m=${fmt(n*M)}$</p>` };
+          return { prompt: String.raw`$n=${qty(n,'mol')}, $M=${qty(M,'g/mol')}. Mass?`, answers: [ans('m', 'm', n * M, 'g')], hints: ['m=nM'], solution: String.raw`<p>$m=${fmt(n*M)}$</p>` };
         } },
       { id: 'chem-u1-mc', title: 'Concept check: moles', kind: 'mc',
         gen: mcPool([

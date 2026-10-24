@@ -10,7 +10,7 @@ const READY_MIN = config.masteryThreshold; // 0.8
 
 function classify(mastery, attempted, total) {
   if (!attempted) return { status: 'practice', label: 'Start practice', detail: 'No attempts yet — learn the lesson, then try a few problems.' };
-  if (mastery < REMEDIAL_MAX) return { status: 'remedial', label: 'Remedial review', detail: 'Accuracy is low. Re-read the lesson, use hints, and retry the weakest problem types.' };
+  if (mastery < REMEDIAL_MAX) return { status: 'remedial', label: 'Remedial review', detail: 'Accuracy is low. Open the lesson: re-read the worked example, note the common mistakes, then retry with hints on — aim to explain each step aloud before checking.' };
   if (mastery < READY_MIN) return { status: 'practice', label: 'More practice', detail: `Keep practicing toward ${Math.round(READY_MIN * 100)}% mastery before moving on.` };
   return { status: 'ready', label: 'Ready to move on', detail: 'Strong first-try mastery. Unlock the next unit or take a mixed quiz.' };
 }

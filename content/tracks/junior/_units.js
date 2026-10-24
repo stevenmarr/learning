@@ -5,14 +5,24 @@ module.exports = [
   {
     num: 1, slug: 'jh-fractions-ratios', title: 'Fractions, Equivalents & Ratios',
     blurb: 'Parts of a whole, equivalent fractions, simplifying, and farm-friendly ratios.',
-    lesson: String.raw`<h2>Why this unit matters</h2>
-<p>Fractions show up when you split feed, share chores, or read a recipe. $\\frac{a}{b}$ means $a$ equal parts when the whole is cut into $b$ pieces. <strong>Equivalent fractions</strong> name the same amount: multiply (or divide) top and bottom by the same nonzero number. A <strong>ratio</strong> $a:b$ compares two quantities — “2 scoops grain for every 3 scoops hay.”</p>
-<h2>Simplify</h2>
-<p>Divide numerator and denominator by their greatest common factor. $\\frac{6}{8}=\\frac{3}{4}$.</p>
+    lesson: String.raw`
+<h2>Learning goals</h2>
+<ul>
+<li>Explain a fraction as equal parts of a whole.</li>
+<li>Build equivalent fractions and simplify.</li>
+<li>Use a ratio to share a total (like feed scoops).</li>
+</ul>
+<h2>Hook</h2>
+<p>Splitting a bag of feed or a pan of brownies only feels fair when the pieces are equal — that is fraction language.</p>
+<h2>Intuition</h2>
+<p>$\\frac{a}{b}$ means $a$ pieces when the whole is cut into $b$ equal pieces. Equivalent fractions are different names for the same amount.</p>
+<h2>Formal</h2>
+<p>Multiply or divide top and bottom by the same nonzero number. Simplify with a common factor. A ratio $a:b$ compares two quantities.</p>
 <div class="example"><h3>Worked example</h3>
-<p>You need $\\frac{2}{3}$ of a 12-cup bag of feed. $\\frac{2}{3}\\times 12 = 8$ cups. Ratio of water to concentrate $3:1$ for 4 cups concentrate → 12 cups water.</p></div>
-<div class="tip"><strong>Sanity check:</strong> A proper fraction is less than 1. If your answer is bigger than the whole you started with, re-read the problem.</div>
-<ul class="takeaways"><li>Same size, different names (equivalents).</li><li>Simplify by a common factor.</li><li>Ratios compare two quantities; keep units clear.</li></ul>`,
+<p>$\\frac{2}{3}$ of a 12-cup bag: $\\frac{2}{3}\\times 12=8$ cups. Ratio grain:hay $2:3$ with 10 scoops total → grain gets $4$ scoops.</p></div>
+<div class="tip"><strong>Common mistake:</strong> adding denominators when adding fractions (save that for a later lesson — here we focus on parts of a whole and equivalents).</div>
+<ul class="takeaways"><li>Equal parts make fair shares.</li><li>Equivalents rename the same amount.</li><li>Ratios compare two counts.</li></ul>
+`,
     problems: [
       { id: 'jh-u1-eq', title: 'Equivalent fraction', kind: 'numeric',
         gen(r){ const a=r.pick([1,2,3,4]); const den=a*2; const k=r.pick([2,3,4,5]); return {prompt:String.raw`The fraction $\\frac{${a}}{${den}}$ equals $\\frac{?}{${den*k}}$. Enter the missing numerator.`,answers:[ans('n','n',a*k,'')],hints:['Multiply top and bottom by the same number.'],solution:String.raw`<p>Multiply by ${k}: numerator ${a*k}.</p>`}; } },

@@ -1,6 +1,6 @@
 'use strict';
 const { buildTrack } = require('../../lib/trackContent');
-const { fmt, q, ans, mcPool } = require('../../helpers');
+const { fmt, q, ans, mcPool , qty} = require('../../helpers');
 const { byId: reg } = require('../registry');
 const C = 3e8;
 
@@ -58,7 +58,7 @@ $$c = f\\lambda \\qquad\\Rightarrow\\qquad f = \\frac{c}{\\lambda},\\quad \\lamb
       { id: 'em-u2-f', title: 'Frequency from λ', kind: 'numeric',
         gen(r) {
           const lam = r.pick([0.01, 0.12, 3, 1500]);
-          return { prompt: String.raw`Vacuum: $\\lambda=${q(lam,'m')}$. Frequency?`, answers: [ans('f', 'f', C / lam, 'Hz')], hints: ['f=c/λ'], solution: String.raw`<p>$f=${fmt(C/lam)}$</p>` };
+          return { prompt: String.raw`Vacuum: $\\lambda=${qty(lam,'m')}. Frequency?`, answers: [ans('f', 'f', C / lam, 'Hz')], hints: ['f=c/λ'], solution: String.raw`<p>$f=${fmt(C/lam)}$</p>` };
         } },
       { id: 'em-u2-vis', title: 'Visible wavelength order', kind: 'mc',
         gen: mcPool([

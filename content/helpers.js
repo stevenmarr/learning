@@ -103,8 +103,23 @@ function mcPool(variants) {
   };
 }
 
-module.exports = { makeRng, DEG, sind, cosd, tand, atan2d, atand, acosd, asind, G, fmt, sgn, par, ans, checkNumeric, parseNumber, mcPool };
+module.exports = { makeRng, DEG, sind, cosd, tand, atan2d, atand, acosd, asind, G, fmt, sgn, par, ans, checkNumeric, parseNumber, mcPool, q, qty };
 
-// Quantity for use inside KaTeX math: q(12.5,'N') -> "12.5\,\text{N}"
+// Quantity for use INSIDE already-open KaTeX math only:
+//   `$I=${q(3,'A')}$` → `$I=3\\,\\text{A}$`
+// Never splice q() into prose with a lone closing `$` — that leaks raw LaTeX.
+// For sentence prompts use qty(): qty(1.9,'A') → "1.9 A"
 function q(v, unit, sig = 4) { return unit ? `${fmt(v, sig)}\\,\\text{${unit}}` : fmt(v, sig); }
-module.exports.q = q;
+
+function qty(v, unit, sig = 4) {
+  const n = fmt(v, sig);
+  if (!unit) return n;
+  let u = String(unit);
+  u = u.replace(/\\Omega/g, 'Ω');
+  u = u.replace(/\\mathrm\{([^}]+)\}/g, '$1');
+  u = u.replace(/\\text\{([^}]+)\}/g, '$1');
+  u = u.replace(/\\mu/g, 'µ');
+  u = u.replace(/\\,/g, ' ').replace(/\\ /g, ' ');
+  u = u.replace(/\s+/g, ' ').trim();
+  return `${n} ${u}`;
+}

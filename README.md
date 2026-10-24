@@ -72,6 +72,8 @@ Open `http://127.0.0.1:3119/learning/`.
 
 ## Version
 
+**2.1.2** — Fix paramedic next-question crash (`pickProblem` empty pool); plain `qty()` prompts (no leaked KaTeX); pedagogy pass on circuits U1, paramedic, chem/junior U1; audit in `docs/pedagogy-audit.md`.
+
 **2.1.1** — Accept fractions in numeric answers (e.g. `1/4`); clearer problem prompts; `scripts/ensure-users.js` for account setup.
 
 **2.1.0** — Deepened curricula across tracks (physics→EM→chem→paramedic already in tree; circuits, digital, CS, junior expanded; advanced math & livestock thickened). Tests green; no droplet deploy.
