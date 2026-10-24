@@ -23,19 +23,19 @@ $$y = mx + b, \qquad y = ax^2 + bx + c$$
         gen(r) {
           const m = r.int(1, 5), b = r.int(-5, 8), x = r.int(-3, 6);
           const y = m * x + b;
-          return { prompt: String.raw`$f(x)=${m}x${b<0?b:'+'+b}$. Find $f(${x})$.`, answers: [ans('y', 'f(x)', y, '')], hints: ['Substitute x, then arithmetic.'], solution: String.raw`<p>$f(${x})=${y}$</p>` };
+          return { prompt: String.raw`Given $f(x)=${m}x${b<0?b:'+'+b}$, find $f(${x})$. Enter the value of $f(${x})$.`, answers: [ans('y', 'f(x)', y, '')], hints: ['Substitute x, then arithmetic.'], solution: String.raw`<p>$f(${x})=${y}$</p>` };
         } },
       { id: 'math-u1-slope', title: 'Slope between points', kind: 'numeric',
         gen(r) {
           const x1 = r.int(-3, 3), y1 = r.int(-5, 5), x2 = x1 + r.int(1, 4), y2 = y1 + r.int(-6, 6);
           const m = (y2 - y1) / (x2 - x1);
-          return { prompt: String.raw`Slope through $(${x1},${y1})$ and $(${x2},${y2})$?`, answers: [ans('m', 'm', m, '')], hints: [String.raw`$m=\\Delta y/\\Delta x$.`], solution: String.raw`<p>$m=${fmt(m)}$</p>` };
+          return { prompt: String.raw`Find the slope of the line through the points $(${x1}, ${y1})$ and $(${x2}, ${y2})$. Enter $m$ as a simplified fraction or decimal.`, answers: [ans('m', 'm', m, '')], hints: [String.raw`$m=\\Delta y/\\Delta x$.`], solution: String.raw`<p>$m=${fmt(m)}$ (also fine as a matching fraction)</p>` };
         } },
       { id: 'math-u1-vertex', title: 'Parabola vertex x', kind: 'numeric',
         gen(r) {
           const a = r.pick([1, 2, -1, -2]), b = r.int(-6, 6), c = r.int(-5, 5);
           const xv = -b / (2 * a);
-          return { prompt: String.raw`$y=${a}x^2${b<0?b:'+'+b}x${c<0?c:'+'+c}$. $x$-coordinate of the vertex?`, answers: [ans('x', 'x', xv, '')], hints: [String.raw`$x=-b/(2a)$.`], solution: String.raw`<p>$x=${fmt(xv)}$</p>` };
+          return { prompt: String.raw`For the parabola $y=${a}x^2${b<0?b:'+'+b}x${c<0?c:'+'+c}$, find the $x$-coordinate of the vertex. Enter $x$.`, answers: [ans('x', 'x', xv, '')], hints: [String.raw`$x=-b/(2a)$.`], solution: String.raw`<p>$x=${fmt(xv)}$</p>` };
         } },
       { id: 'math-u1-mc', title: 'Concept check: functions', kind: 'mc',
         gen: mcPool([
@@ -61,20 +61,20 @@ $$y = mx + b, \qquad y = ax^2 + bx + c$$
       { id: 'math-u2-linear', title: 'Solve ax+b=c', kind: 'numeric',
         gen(r) {
           const a = r.int(2, 9), x = r.int(-5, 8), b = r.int(-10, 10), c = a * x + b;
-          return { prompt: String.raw`Solve $${a}x${b<0?b:'+'+b}=${c}$.`, answers: [ans('x', 'x', x, '')], hints: ['Isolate x.'], solution: String.raw`<p>$x=${x}$</p>` };
+          return { prompt: String.raw`Solve the linear equation $${a}x${b<0?b:'+'+b}=${c}$ for $x$. Enter $x$.`, answers: [ans('x', 'x', x, '')], hints: ['Isolate x.'], solution: String.raw`<p>$x=${x}$</p>` };
         } },
       { id: 'math-u2-sys', title: '2×2 system', kind: 'numeric',
         gen(r) {
           const x = r.int(1, 5), y = r.int(1, 5);
           const a1 = 1, b1 = 1, c1 = x + y;
           const a2 = 1, b2 = -1, c2 = x - y;
-          return { prompt: String.raw`Solve $\\begin{cases}x+y=${c1}\\\\ x-y=${c2}\\end{cases}$. Enter $x$.`, answers: [ans('x', 'x', x, '')], hints: ['Add the equations to eliminate y.'], solution: String.raw`<p>$x=${x}$, $y=${y}$</p>` };
+          return { prompt: String.raw`Solve the system $\\begin{cases}x+y=${c1}\\\\ x-y=${c2}\\end{cases}$. Enter the value of $x$ only.`, answers: [ans('x', 'x', x, '')], hints: ['Add the equations to eliminate y.'], solution: String.raw`<p>$x=${x}$, $y=${y}$</p>` };
         } },
       { id: 'math-u2-sys-y', title: '2×2 system (find y)', kind: 'numeric',
         gen(r) {
           const x = r.int(1, 6), y = r.int(-3, 6);
           const c1 = 2 * x + y, c2 = x + y;
-          return { prompt: String.raw`Solve $\\begin{cases}2x+y=${c1}\\\\ x+y=${c2}\\end{cases}$. Enter $y$.`, answers: [ans('y', 'y', y, '')], hints: ['Subtract after aligning.'], solution: String.raw`<p>$x=${x}$, $y=${y}$</p>` };
+          return { prompt: String.raw`Solve the system $\\begin{cases}2x+y=${c1}\\\\ x+y=${c2}\\end{cases}$. Enter the value of $y$ only.`, answers: [ans('y', 'y', y, '')], hints: ['Subtract after aligning.'], solution: String.raw`<p>$x=${x}$, $y=${y}$</p>` };
         } },
       { id: 'math-u2-mc', title: 'Concept check: equations', kind: 'mc',
         gen: mcPool([
@@ -99,17 +99,17 @@ $$a^m a^n=a^{m+n}, \\quad (a^m)^n=a^{mn}, \\quad \\log(xy)=\\log x+\\log y$$
       { id: 'math-u3-exp', title: 'Simplify exponent product', kind: 'numeric',
         gen(r) {
           const a = r.int(2, 5), m = r.int(1, 4), n = r.int(1, 4);
-          return { prompt: String.raw`Simplify $${a}^{${m}}\\cdot ${a}^{${n}}$ and enter the exponent of $${a}$ (so answer $k$ means $${a}^k$).`, answers: [ans('k', 'k', m + n, '')], hints: ['Add exponents.'], solution: String.raw`<p>$k=${m+n}$</p>` };
+          return { prompt: String.raw`Simplify $${a}^{${m}}\\cdot ${a}^{${n}}$ as $${a}^{k}$. Enter the exponent $k$.`, answers: [ans('k', 'k', m + n, '')], hints: ['Add exponents.'], solution: String.raw`<p>$k=${m+n}$</p>` };
         } },
       { id: 'math-u3-log', title: 'Log as inverse', kind: 'numeric',
         gen(r) {
           const b = r.pick([2, 3, 5, 10]), k = r.int(1, 4), n = b ** k;
-          return { prompt: String.raw`$\\log_{${b}}(${n})=?$`, answers: [ans('x', 'x', k, '')], hints: [String.raw`$b^x=n$.`], solution: String.raw`<p>$x=${k}$</p>` };
+          return { prompt: String.raw`Evaluate $\\log_{${b}}(${n})$. Enter the numeric value.`, answers: [ans('x', 'x', k, '')], hints: [String.raw`$b^x=n$.`], solution: String.raw`<p>$x=${k}$</p>` };
         } },
       { id: 'math-u3-growth', title: 'Exponential evaluation', kind: 'numeric',
         gen(r) {
           const a = r.pick([2, 3]), t = r.int(1, 5), y = a ** t;
-          return { prompt: String.raw`$y=$${a}$^{t}$. Find $y$ when $t=${t}$.`, answers: [ans('y', 'y', y, '')], hints: ['Repeated multiply.'], solution: String.raw`<p>$y=${y}$</p>` };
+          return { prompt: String.raw`The exponential $y=${a}^{t}$ is evaluated at $t=${t}$. Enter $y$.`, answers: [ans('y', 'y', y, '')], hints: ['Repeated multiply.'], solution: String.raw`<p>$y=${y}$</p>` };
         } },
       { id: 'math-u3-mc', title: 'Concept check: exp/log', kind: 'mc',
         gen: mcPool([
@@ -135,12 +135,12 @@ $$a^m a^n=a^{m+n}, \\quad (a^m)^n=a^{mn}, \\quad \\log(xy)=\\log x+\\log y$$
         gen(r) {
           const a = r.int(1, 4), b = r.int(-3, 5), x0 = r.int(-2, 4);
           const L = a * x0 + b;
-          return { prompt: String.raw`$\\lim_{x\\to ${x0}}(${a}x${b<0?b:'+'+b})=?$`, answers: [ans('L', 'L', L, '')], hints: ['Substitute for polynomials.'], solution: String.raw`<p>$L=${L}$</p>` };
+          return { prompt: String.raw`Evaluate $\\lim_{x\\to ${x0}}(${a}x${b<0?b:'+'+b})$. Enter the limit value.`, answers: [ans('L', 'L', L, '')], hints: ['Substitute for polynomials.'], solution: String.raw`<p>$L=${L}$</p>` };
         } },
       { id: 'math-u4-lim-quad', title: 'Limit of quadratic', kind: 'numeric',
         gen(r) {
           const x0 = r.int(-3, 3), L = x0 * x0 - 1;
-          return { prompt: String.raw`$\\lim_{x\\to ${x0}}(x^2-1)=?$`, answers: [ans('L', 'L', L, '')], hints: ['Substitute.'], solution: String.raw`<p>$L=${L}$</p>` };
+          return { prompt: String.raw`Evaluate $\\lim_{x\\to ${x0}}(x^2-1)$. Enter the limit value.`, answers: [ans('L', 'L', L, '')], hints: ['Substitute.'], solution: String.raw`<p>$L=${L}$</p>` };
         } },
       { id: 'math-u4-mc', title: 'Concept check: limits', kind: 'mc',
         gen: mcPool([
@@ -169,14 +169,14 @@ $$\\frac{d}{dx}x^n = n x^{n-1}$$
         gen(r) {
           const n = r.int(2, 6), c = r.int(1, 5);
           // derivative of c x^n is (c*n) x^{n-1}; ask for coefficient c*n
-          return { prompt: String.raw`If $f(x)=${c}x^{${n}}$, then $f'(x)=A x^{${n-1}}$. What is $A$?`, answers: [ans('A', 'A', c * n, '')], hints: ['Multiply coefficient by exponent.'], solution: String.raw`<p>$A=${c*n}$</p>` };
+          return { prompt: String.raw`If $f(x)=${c}x^{${n}}$, then $f'(x)=A x^{${n-1}}$. Enter the coefficient $A$.`, answers: [ans('A', 'A', c * n, '')], hints: ['Multiply coefficient by exponent.'], solution: String.raw`<p>$A=${c*n}$</p>` };
         } },
       { id: 'math-u5-eval', title: 'Evaluate derivative', kind: 'numeric',
         gen(r) {
           const x0 = r.int(1, 4);
           // f = x^3 - 2x, f' = 3x^2 - 2
           const yp = 3 * x0 * x0 - 2;
-          return { prompt: String.raw`$f(x)=x^3-2x$. Find $f'(${x0})$.`, answers: [ans('yp', "f'", yp, '')], hints: [String.raw`$f'=3x^2-2$.`], solution: String.raw`<p>$f'(${x0})=${yp}$</p>` };
+          return { prompt: String.raw`For $f(x)=x^3-2x$, find $f'(${x0})$. Enter the derivative value.`, answers: [ans('yp', "f'", yp, '')], hints: [String.raw`$f'=3x^2-2$.`], solution: String.raw`<p>$f'(${x0})=${yp}$</p>` };
         } },
       { id: 'math-u5-mc', title: 'Concept check: derivatives', kind: 'mc',
         gen: mcPool([
@@ -208,7 +208,7 @@ $$\\frac{d}{dx}x^n = n x^{n-1}$$
         gen(r) {
           const rr = r.pick([2, 3, 4, 5]), dr = r.pick([0.1, 0.2, 0.5]);
           const dA = 2 * Math.PI * rr * dr;
-          return { prompt: String.raw`$A=\\pi r^2$. If $r=${rr}$ and $dr/dt=${dr}$, find $dA/dt$ (use $\\pi\\approx3.1416$).`, answers: [ans('dA', 'dA/dt', dA, '')], hints: [String.raw`$dA/dt=2\\pi r\\,dr/dt$.`], solution: String.raw`<p>$dA/dt=${fmt(dA)}$</p>` };
+          return { prompt: String.raw`A circle has area $A=\\pi r^2$. Given $r=${rr}$ and $dr/dt=${dr}$, find $dA/dt$ (use $\\pi\\approx 3.1416$). Enter $dA/dt$.`, answers: [ans('dA', 'dA/dt', dA, '')], hints: [String.raw`$dA/dt=2\\pi r\\,dr/dt$.`], solution: String.raw`<p>$dA/dt=${fmt(dA)}$</p>` };
         } },
       { id: 'math-u6-mc', title: 'Concept check: applications', kind: 'mc',
         gen: mcPool([
@@ -238,19 +238,19 @@ $$\\int x^n\\,dx = \\frac{x^{n+1}}{n+1}+C \\quad (n\\neq -1), \\qquad \\int e^{k
         gen(r) {
           const n = r.int(1, 5);
           // ∫ x^n = x^{n+1}/(n+1); ask for denominator n+1 in the coefficient of x^{n+1}
-          return { prompt: String.raw`$\\int x^{${n}}\\,dx = \\frac{1}{k}x^{${n+1}}+C$. What is $k$?`, answers: [ans('k', 'k', n + 1, '')], hints: ['k = n+1.'], solution: String.raw`<p>$k=${n+1}$</p>` };
+          return { prompt: String.raw`An antiderivative of $x^{${n}}$ is $\\frac{1}{k}x^{${n+1}}+C$. Enter the positive constant $k$.`, answers: [ans('k', 'k', n + 1, '')], hints: ['k = n+1.'], solution: String.raw`<p>$k=${n+1}$</p>` };
         } },
       { id: 'math-u7-def', title: 'Definite integral of x', kind: 'numeric',
         gen(r) {
           const a = r.int(0, 2), b = a + r.int(2, 5);
           const val = 0.5 * (b * b - a * a);
-          return { prompt: String.raw`$\\int_{${a}}^{${b}} x\\,dx=?$`, answers: [ans('I', 'I', val, '')], hints: [String.raw`$\\int x=x^2/2$.`], solution: String.raw`<p>$I=${fmt(val)}$</p>` };
+          return { prompt: String.raw`Evaluate the definite integral $\\int_{${a}}^{${b}} x\\,dx$. Enter the value.`, answers: [ans('I', 'I', val, '')], hints: [String.raw`$\\int x=x^2/2$.`], solution: String.raw`<p>$I=${fmt(val)}$</p>` };
         } },
       { id: 'math-u7-const', title: 'Integral of constant', kind: 'numeric',
         gen(r) {
           const c = r.int(2, 9), a = r.int(0, 3), b = a + r.int(2, 6);
           const val = c * (b - a);
-          return { prompt: String.raw`$\int_{${a}}^{${b}} ${c}\,dx=?$`, answers: [ans('I', 'I', val, '')], hints: ['Constant × width.'], solution: String.raw`<p>$I=${val}$</p>` };
+          return { prompt: String.raw`Evaluate the definite integral $\\int_{${a}}^{${b}} ${c}\\,dx$. Enter the value.`, answers: [ans('I', 'I', val, '')], hints: ['Constant × width.'], solution: String.raw`<p>$I=${val}$</p>` };
         } },
       { id: 'math-u7-mc', title: 'Concept check: integrals', kind: 'mc',
         gen: mcPool([
@@ -277,18 +277,18 @@ $$f_{\\mathrm{avg}}=\\frac{1}{b-a}\\int_a^b f(x)\\,dx$$
         gen(r) {
           const a = 0, b = r.pick([2, 4, 5, 10]);
           // f(x)=x on [0,b], avg = b/2
-          return { prompt: String.raw`Average value of $f(x)=x$ on $[0,${b}]$?`, answers: [ans('m', 'f_{avg}', b / 2, '')], hints: [String.raw`$\\frac{1}{b}\\int_0^b x\\,dx=b/2$.`], solution: String.raw`<p>${b/2}</p>` };
+          return { prompt: String.raw`Find the average value of $f(x)=x$ on the interval $[0, ${b}]$. Enter $f_{\\mathrm{avg}}$.`, answers: [ans('m', 'f_{avg}', b / 2, '')], hints: [String.raw`$\\frac{1}{b}\\int_0^b x\\,dx=b/2$.`], solution: String.raw`<p>${b/2}</p>` };
         } },
       { id: 'math-u8-sub', title: 'Power after sub (conceptual numeric)', kind: 'numeric',
         gen(r) {
           const n = r.int(2, 5);
           // ∫ 2x (x^2+1)^n dx → u=x^2+1, result (u^{n+1})/(n+1); ask n+1
-          return { prompt: String.raw`For $\\int 2x(x^2+1)^{${n}}\\,dx$, with $u=x^2+1$, the antiderivative is $\\frac{u^{k}}{k}+C$. What is $k$?`, answers: [ans('k', 'k', n + 1, '')], hints: ['Power increases by 1.'], solution: String.raw`<p>$k=${n+1}$</p>` };
+          return { prompt: String.raw`For $\\int 2x(x^2+1)^{${n}}\\,dx$ with substitution $u=x^2+1$, the antiderivative is $\\frac{u^{k}}{k}+C$. Enter $k$.`, answers: [ans('k', 'k', n + 1, '')], hints: ['Power increases by 1.'], solution: String.raw`<p>$k=${n+1}$</p>` };
         } },
       { id: 'math-u8-net', title: 'Net change from derivative', kind: 'numeric',
         gen(r) {
           const v = r.int(2, 6), b = r.pick([3, 4, 5]);
-          return { prompt: String.raw`If $s'(t)=${v}$ (constant), net change in $s$ from $t=0$ to $t=${b}$?`, answers: [ans('d', '\\Delta s', v * b, '')], hints: ['Integral of constant rate.'], solution: String.raw`<p>${v*b}</p>` };
+          return { prompt: String.raw`Velocity is constant: $s'(t)=${v}$. Find the net change in $s$ from $t=0$ to $t=${b}$. Enter $\\Delta s$.`, answers: [ans('d', '\\Delta s', v * b, '')], hints: ['Integral of constant rate.'], solution: String.raw`<p>${v*b}</p>` };
         } },
       { id: 'math-u8-mc', title: 'Concept check: calc2 tools', kind: 'mc',
         gen: mcPool([
@@ -317,7 +317,7 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
           const a = [r.int(-3, 4), r.int(-3, 4), r.int(-3, 4)];
           const b = [r.int(-3, 4), r.int(-3, 4), r.int(-3, 4)];
           const d = a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
-          return { prompt: String.raw`$\\mathbf a=\\langle ${a.join(',')}\\rangle$, $\\mathbf b=\\langle ${b.join(',')}\\rangle$. Find $\\mathbf a\\cdot\\mathbf b$.`, answers: [ans('d', 'a\\cdot b', d, '')], hints: ['Multiply matching components; add.'], solution: String.raw`<p>${d}</p>` };
+          return { prompt: String.raw`Let $\\mathbf a=\\langle ${a.join(',')}\\rangle$ and $\\mathbf b=\\langle ${b.join(',')}\\rangle$. Compute the dot product $\\mathbf a\\cdot\\mathbf b$. Enter the scalar.`, answers: [ans('d', 'a\\cdot b', d, '')], hints: ['Multiply matching components; add.'], solution: String.raw`<p>${d}</p>` };
         } },
       { id: 'math-u9-mag', title: 'Vector magnitude', kind: 'numeric',
         gen(r) {
@@ -326,14 +326,14 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
           const pairs = [[3,4],[5,12],[8,15],[7,24]];
           const [A,B] = r.pick(pairs);
           const mag = Math.hypot(A, B);
-          return { prompt: String.raw`Magnitude of $\\langle ${A},${B}\\rangle$?`, answers: [ans('m', '|v|', mag, '')], hints: [String.raw`$\\sqrt{x^2+y^2}$.`], solution: String.raw`<p>${fmt(mag)}</p>` };
+          return { prompt: String.raw`Find the magnitude of the vector $\\langle ${A}, ${B}\\rangle$. Enter $|\\mathbf v|$.`, answers: [ans('m', '|v|', mag, '')], hints: [String.raw`$\\sqrt{x^2+y^2}$.`], solution: String.raw`<p>${fmt(mag)}</p>` };
         } },
       { id: 'math-u9-unit', title: 'Unit vector x-component', kind: 'numeric',
         gen(r) {
           const pairs = [[3,4],[5,12],[8,15]];
           const [A,B] = r.pick(pairs);
           const ux = A / Math.hypot(A, B);
-          return { prompt: String.raw`Unit vector in direction $\langle ${A},${B}\rangle$. Enter the $x$-component.`, answers: [ans('ux', 'u_x', ux, '')], hints: ['Divide by magnitude.'], solution: String.raw`<p>$u_x=${fmt(ux)}$</p>` };
+          return { prompt: String.raw`Find the unit vector in the direction of $\\langle ${A}, ${B}\\rangle$. Enter only the $x$-component.`, answers: [ans('ux', 'u_x', ux, '')], hints: ['Divide by magnitude.'], solution: String.raw`<p>$u_x=${fmt(ux)}$</p>` };
         } },
       { id: 'math-u9-mc', title: 'Concept check: vectors', kind: 'mc',
         gen: mcPool([
@@ -360,18 +360,18 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
           const a = r.int(1, 4), b = r.int(1, 4), x = r.int(1, 3), y = r.int(1, 3);
           // f = a x^2 y + b y, fx = 2 a x y
           const fx = 2 * a * x * y;
-          return { prompt: String.raw`$f(x,y)=${a}x^2 y + ${b}y$. Find $f_x(${x},${y})$.`, answers: [ans('fx', 'f_x', fx, '')], hints: ['Treat y constant; derivative in x.'], solution: String.raw`<p>$f_x=2\\cdot${a} x y$ → ${fx}</p>` };
+          return { prompt: String.raw`For $f(x,y)=${a}x^2 y + ${b}y$, find the partial $f_x$ at $(${x}, ${y})$. Enter $f_x$.`, answers: [ans('fx', 'f_x', fx, '')], hints: ['Treat y constant; derivative in x.'], solution: String.raw`<p>$f_x=2\\cdot${a} x y$ → ${fx}</p>` };
         } },
       { id: 'math-u10-fy', title: 'Partial fy', kind: 'numeric',
         gen(r) {
           const x = r.int(1, 4), y = r.int(1, 4);
           // f = x y^2, fy = 2 x y
-          return { prompt: String.raw`$f(x,y)=x y^2$. Find $f_y(${x},${y})$.`, answers: [ans('fy', 'f_y', 2 * x * y, '')], hints: ['Treat x constant.'], solution: String.raw`<p>${2*x*y}</p>` };
+          return { prompt: String.raw`For $f(x,y)=x y^2$, find $f_y(${x}, ${y})$. Enter the value.`, answers: [ans('fy', 'f_y', 2 * x * y, '')], hints: ['Treat x constant.'], solution: String.raw`<p>${2*x*y}</p>` };
         } },
       { id: 'math-u10-eval', title: 'Evaluate f(x,y)', kind: 'numeric',
         gen(r) {
           const x = r.int(1, 4), y = r.int(1, 4);
-          return { prompt: String.raw`$f(x,y)=3x+2y$. Find $f(${x},${y})$.`, answers: [ans('f', 'f', 3*x+2*y, '')], hints: ['Substitute.'], solution: String.raw`<p>${3*x+2*y}</p>` };
+          return { prompt: String.raw`For $f(x,y)=3x+2y$, evaluate $f(${x}, ${y})$. Enter the value.`, answers: [ans('f', 'f', 3*x+2*y, '')], hints: ['Substitute.'], solution: String.raw`<p>${3*x+2*y}</p>` };
         } },
       { id: 'math-u10-mc', title: 'Concept check: partials', kind: 'mc',
         gen: mcPool([
@@ -398,19 +398,19 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
         gen(r) {
           const y0 = r.pick([10, 20, 50, 100]), k = r.pick([0.1, 0.2, 0.5]), t = r.pick([1, 2, 3]);
           const y = y0 * Math.exp(k * t);
-          return { prompt: String.raw`$y'=ky$ with $y(0)=${y0}$, $k=${k}$. Find $y(${t})$ (use $e^{${fmt(k*t)}}$).`, answers: [ans('y', 'y', y, '')], hints: [String.raw`$y=y_0 e^{kt}$.`], solution: String.raw`<p>$y=${fmt(y)}$</p>` };
+          return { prompt: String.raw`For $y'=ky$ with $y(0)=${y0}$ and $k=${k}$, find $y(${t})$ using $y=y_0 e^{kt}$. Enter $y$ (you may use $e^{${fmt(k*t)}}$).`, answers: [ans('y', 'y', y, '')], hints: [String.raw`$y=y_0 e^{kt}$.`], solution: String.raw`<p>$y=${fmt(y)}$</p>` };
         } },
       { id: 'math-u11-halflife', title: 'Half-life remaining', kind: 'numeric',
         gen(r) {
           const y0 = r.pick([80, 100, 200]), n = r.pick([1, 2, 3]);
           const y = y0 / (2 ** n);
-          return { prompt: String.raw`A quantity starts at $${y0}$ and halves every half-life. After $${n}$ half-lives, how much remains?`, answers: [ans('y', 'y', y, '')], hints: ['Divide by 2 each half-life.'], solution: String.raw`<p>$y=${y}$</p>` };
+          return { prompt: String.raw`A quantity starts at $${y0}$ and halves every half-life. After $${n}$ half-lives, how much remains? Enter the amount.`, answers: [ans('y', 'y', y, '')], hints: ['Divide by 2 each half-life.'], solution: String.raw`<p>$y=${y}$</p>` };
         } },
       { id: 'math-u11-k', title: 'Growth constant from doubling', kind: 'numeric',
         gen(r) {
           const T = r.pick([2, 4, 5, 10]);
           const k = Math.LN2 / T;
-          return { prompt: String.raw`$y=y_0 e^{kt}$ doubles when $t=${T}$. Find $k=\ln 2 / T$.`, answers: [ans('k', 'k', k, '')], hints: ['k = ln2 / doubling time.'], solution: String.raw`<p>$k=${fmt(k)}$</p>` };
+          return { prompt: String.raw`A quantity $y=y_0 e^{kt}$ doubles every $T=${T}$ time units. Find $k=\\ln 2 / T$. Enter $k$.`, answers: [ans('k', 'k', k, '')], hints: ['k = ln2 / doubling time.'], solution: String.raw`<p>$k=${fmt(k)}$</p>` };
         } },
       { id: 'math-u11-mc', title: 'Concept check: first-order DE', kind: 'mc',
         gen: mcPool([
@@ -436,7 +436,7 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
           const r1 = r.int(-5, -1), r2 = r.int(-5, -1);
           // (r-r1)(r-r2)=r^2-(r1+r2)r+r1 r2 → for y'' - (r1+r2)y' + ... 
           // Ask: for r^2 - (r1+r2)r + r1 r2 = 0, sum of roots
-          return { prompt: String.raw`Characteristic equation $(r-${r1})(r-${r2})=0$. Sum of roots $r_1+r_2$?`, answers: [ans('s', 's', r1 + r2, '')], hints: ['Add the roots.'], solution: String.raw`<p>${r1+r2}</p>` };
+          return { prompt: String.raw`The characteristic equation factors as $(r-${r1})(r-${r2})=0$. Enter the sum of the roots $r_1+r_2$.`, answers: [ans('s', 's', r1 + r2, '')], hints: ['Add the roots.'], solution: String.raw`<p>${r1+r2}</p>` };
         } },
       { id: 'math-u12-disc', title: 'Discriminant sign class', kind: 'numeric',
         gen(r) {
@@ -446,12 +446,12 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
           if (kind === 'over') { b = 5; c = 4; code = 1; } // 25-16>0
           else if (kind === 'crit') { b = 4; c = 4; code = 0; } // 16-16=0
           else { b = 2; c = 5; code = -1; } // 4-20<0
-          return { prompt: String.raw`For $y''+${b}y'+${c}y=0$, enter $1$ if overdamped (two real roots), $0$ if critically damped, $-1$ if underdamped (complex roots).`, answers: [ans('k', 'k', code, '')], hints: [String.raw`Look at $b^2-4c$.`], solution: String.raw`<p>Discriminant ${b*b-4*c} → code ${code}</p>` };
+          return { prompt: String.raw`For $y''+${b}y'+${c}y=0$, enter $1$ if overdamped (two real roots), $0$ if critically damped, or $-1$ if underdamped.`, answers: [ans('k', 'k', code, '')], hints: [String.raw`Look at $b^2-4c$.`], solution: String.raw`<p>Discriminant ${b*b-4*c} → code ${code}</p>` };
         } },
       { id: 'math-u12-product', title: 'Product of characteristic roots', kind: 'numeric',
         gen(r) {
           const r1 = r.int(-6, -1), r2 = r.int(-6, -1);
-          return { prompt: String.raw`Roots $r=${r1}$ and $r=${r2}$. Product $r_1 r_2$?`, answers: [ans('p', 'p', r1 * r2, '')], hints: ['Multiply.'], solution: String.raw`<p>${r1*r2}</p>` };
+          return { prompt: String.raw`The characteristic roots are $r=${r1}$ and $r=${r2}$. Enter the product $r_1 r_2$.`, answers: [ans('p', 'p', r1 * r2, '')], hints: ['Multiply.'], solution: String.raw`<p>${r1*r2}</p>` };
         } },
       { id: 'math-u12-mc', title: 'Concept check: 2nd order DE', kind: 'mc',
         gen: mcPool([

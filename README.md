@@ -72,6 +72,8 @@ Open `http://127.0.0.1:3119/learning/`.
 
 ## Version
 
+**2.1.1** — Accept fractions in numeric answers (e.g. `1/4`); clearer problem prompts; `scripts/ensure-users.js` for account setup.
+
 **2.1.0** — Deepened curricula across tracks (physics→EM→chem→paramedic already in tree; circuits, digital, CS, junior expanded; advanced math & livestock thickened). Tests green; no droplet deploy.
 
 **2.0.0** — Learning Hub launch: multi-module academy under `/learning`.

@@ -20,7 +20,7 @@ $$v = v_0 + at, \qquad x = x_0 + v_0 t + \tfrac12 at^2, \qquad v^2 = v_0^2 + 2a(
       { id: 'phy-u1-vf', title: 'Final velocity', kind: 'numeric',
         gen(r) {
           const v0 = r.step(0, 10, 1), a = r.step(1, 4, 0.5), t = r.step(2, 8, 1);
-          return { prompt: String.raw`$v_0=${q(v0,'m/s')}$, $a=${q(a,'m/s^2')}$, $t=${q(t,'s')}$. Find $v$.`, answers: [ans('v', 'v', v0 + a * t, 'm/s')], hints: [String.raw`$v=v_0+at$.`], solution: String.raw`<p>$v=${fmt(v0+a*t)}\ \\text{m/s}$</p>` };
+          return { prompt: String.raw`An object has initial velocity $v_0=${q(v0,'m/s')}$ and constant acceleration $a=${q(a,'m/s^2')}$ for time $t=${q(t,'s')}$. Find final velocity $v$. Enter $v$ in m/s.`, answers: [ans('v', 'v', v0 + a * t, 'm/s')], hints: [String.raw`$v=v_0+at$.`], solution: String.raw`<p>$v=${fmt(v0+a*t)}\ \\text{m/s}$</p>` };
         } },
       { id: 'phy-u1-x', title: 'Displacement under constant a', kind: 'numeric',
         gen(r) {
@@ -62,12 +62,12 @@ $$v = v_0 + at, \qquad x = x_0 + v_0 t + \tfrac12 at^2, \qquad v^2 = v_0^2 + 2a(
       { id: 'phy-u2-a', title: 'a from net force', kind: 'numeric',
         gen(r) {
           const m = r.step(2, 10, 1), F = r.step(6, 40, 2);
-          return { prompt: String.raw`Net force $${q(F,'N')}$ on mass $${q(m,'kg')}$. Acceleration?`, answers: [ans('a', 'a', F / m, 'm/s²')], hints: [String.raw`$a=F/m$.`], solution: String.raw`<p>$a=${fmt(F/m)}$</p>` };
+          return { prompt: String.raw`A net force of ${q(F,'N')}$ acts on a mass of ${q(m,'kg')}$. Find the acceleration $a=F/m$. Enter $a$ in m/s².`, answers: [ans('a', 'a', F / m, 'm/s²')], hints: [String.raw`$a=F/m$.`], solution: String.raw`<p>$a=${fmt(F/m)}$</p>` };
         } },
       { id: 'phy-u2-weight', title: 'Weight', kind: 'numeric',
         gen(r) {
           const m = r.step(3, 80, 1);
-          return { prompt: String.raw`Mass $${q(m,'kg')}$. Weight on Earth ($g=9.81$)?`, answers: [ans('W', 'W', m * G, 'N')], hints: ['W=mg'], solution: String.raw`<p>$W=${fmt(m*G)}$</p>` };
+          return { prompt: String.raw`An object has mass ${q(m,'kg')}$. Find its weight on Earth using $g=9.81\\ \mathrm{m/s^2}$. Enter weight in newtons.`, answers: [ans('W', 'W', m * G, 'N')], hints: ['W=mg'], solution: String.raw`<p>$W=${fmt(m*G)}$</p>` };
         } },
       { id: 'phy-u2-net', title: 'Net force two pulls', kind: 'numeric',
         gen(r) {
@@ -97,12 +97,12 @@ $$v = v_0 + at, \qquad x = x_0 + v_0 t + \tfrac12 at^2, \qquad v^2 = v_0^2 + 2a(
       { id: 'phy-u3-K', title: 'Kinetic energy', kind: 'numeric',
         gen(r) {
           const m = r.step(1, 5, 0.5), v = r.step(2, 10, 1);
-          return { prompt: String.raw`$m=${q(m,'kg')}$, $v=${q(v,'m/s')}$. Kinetic energy?`, answers: [ans('K', 'K', 0.5 * m * v * v, 'J')], hints: [String.raw`$K=\\frac12 mv^2$.`], solution: String.raw`<p>$K=${fmt(0.5*m*v*v)}$</p>` };
+          return { prompt: String.raw`A mass $m=${q(m,'kg')}$ moves at speed $v=${q(v,'m/s')}$. Find kinetic energy $K=\\tfrac12 mv^2$. Enter $K$ in joules.`, answers: [ans('K', 'K', 0.5 * m * v * v, 'J')], hints: [String.raw`$K=\\frac12 mv^2$.`], solution: String.raw`<p>$K=${fmt(0.5*m*v*v)}$</p>` };
         } },
       { id: 'phy-u3-W', title: 'Work by constant force', kind: 'numeric',
         gen(r) {
           const F = r.int(5, 20), dx = r.int(2, 10);
-          return { prompt: String.raw`Force $${q(F,'N')}$ along displacement $${q(dx,'m')}$ ($\\theta=0$). Work?`, answers: [ans('W', 'W', F * dx, 'J')], hints: ['W=F Δx when aligned.'], solution: String.raw`<p>$W=${F*dx}$</p>` };
+          return { prompt: String.raw`A constant force ${q(F,'N')}$ acts in the direction of a displacement ${q(dx,'m')}$. Find the work $W=F\\,\\Delta x$. Enter $W$ in joules.`, answers: [ans('W', 'W', F * dx, 'J')], hints: ['W=F Δx when aligned.'], solution: String.raw`<p>$W=${F*dx}$</p>` };
         } },
       { id: 'phy-u3-p', title: '1D inelastic stick', kind: 'numeric',
         gen(r) {

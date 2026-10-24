@@ -138,7 +138,7 @@
         if (r.review === 'graduated') msg += ' 🎓 This item graduated from your review queue.';
         showSolution(form, true);
       } else {
-        msg = `<strong>Not quite.</strong> ${r.results.some((x) => x.parsed === null) ? 'One entry isn\'t a number I can read (use digits, a decimal point and an optional minus sign). ' : ''}${mode === 'quiz' ? 'Check the worked solution below.' : 'Check your signs and units, try a hint, or open the worked solution.'}`;
+        msg = `<strong>Not quite.</strong> ${r.results.some((x) => x.parsed === null) ? 'One entry isn\'t a number I can read (use a decimal like 0.25, a fraction like 1/4, scientific like 1.2e-3, and an optional minus sign). ' : ''}${mode === 'quiz' ? 'Check the worked solution below.' : 'Check your signs and units, try a hint, or open the worked solution.'}`;
         if (r.firstAttempt && r.review === 'queued') msg += ' This problem type has been added to your review queue.';
         if (mode === 'quiz') showSolution(form, true);
         if (p.kind === 'mc' && mode === 'quiz') form.querySelectorAll('.choice').forEach((lab) => { if (parseInt(lab.querySelector('input').value, 10) === r.correctChoice) lab.classList.add('right'); });

@@ -70,7 +70,16 @@ function parseNumber(raw) {
   if (raw === undefined || raw === null) return null;
   let s = String(raw).trim().replace(/,/g, '').replace(/\s+/g, '').replace(/[\u2212\u2013]/g, '-');
   if (s === '') return null;
-  // allow forms like 1.2x10^3 or 1.2*10^3
+  // Fractions: 1/4, -3/2, 0.5/2, .25/1 (spaces already stripped)
+  const frac = s.match(/^([-+]?)(\d+\.?\d*|\.\d+)\/([-+]?)(\d+\.?\d*|\.\d+)$/);
+  if (frac) {
+    const num = parseFloat((frac[1] || '') + frac[2]);
+    const den = parseFloat((frac[3] || '') + frac[4]);
+    if (!isFinite(num) || !isFinite(den) || den === 0) return null;
+    const v = num / den;
+    return isFinite(v) ? v : null;
+  }
+  // Scientific: 1.2x10^3 or 1.2*10^3
   const m = s.match(/^([-+]?\d*\.?\d+)(?:[x*]10\^([-+]?\d+))$/i);
   if (m) return parseFloat(m[1]) * Math.pow(10, parseInt(m[2], 10));
   if (!/^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(s)) return null;

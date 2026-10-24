@@ -19,9 +19,9 @@ module.exports = [
 <ul class="takeaways"><li>Think before syntax.</li><li>Algorithms: finite, clear, terminating.</li><li>Abstraction is a feature.</li></ul>`,
     problems: [
       { id: 'cs-u1-steps', title: 'Count algorithm steps', kind: 'numeric',
-        gen(r){ const n=r.int(3,12); return {prompt:String.raw`2 setup steps, then 1 step for each of $${n}$ items. Total steps?`,answers:[ans('s','S',2+n,'')],hints:['Setup + one per item'],solution:String.raw`<p>${2+n}</p>`}; } },
+        gen(r){ const n=r.int(3,12); return {prompt:String.raw`An algorithm does 2 setup steps, then 1 step for each of ${n}$ items. How many steps in total? Enter the total.`,answers:[ans('s','S',2+n,'')],hints:['Setup + one per item'],solution:String.raw`<p>${2+n}</p>`}; } },
       { id: 'cs-u1-decomp', title: 'Even split fraction', kind: 'numeric',
-        gen(r){ const n=r.pick([3,4,5,6]); return {prompt:String.raw`Split a job into $${n}$ equal subproblems. Each is what % of the whole?`,answers:[ans('p','p',100/n,'%')],hints:['100/n'],solution:String.raw`<p>${fmt(100/n)}%</p>`}; } },
+        gen(r){ const n=r.pick([3,4,5,6]); return {prompt:String.raw`A job is split evenly into ${n}$ subproblems. What percent of the original work is each piece? Enter the percent.`,answers:[ans('p','p',100/n,'%')],hints:['100/n'],solution:String.raw`<p>${fmt(100/n)}%</p>`}; } },
       { id: 'cs-u1-mc', title: 'Concept check: thinking', kind: 'mc',
         gen: mcPool([
           {q:'Abstraction means…',correct:'hiding detail behind a useful name/interface',wrong:['writing longer code','avoiding math','using a faster computer'],why:'Focus on what matters.'},
@@ -41,16 +41,16 @@ module.exports = [
 <ul class="takeaways"><li>Sorted + binary search ≫ linear for large $n$.</li><li>Trace small cases.</li><li>Wrong algorithms can “feel” fine on lucky data.</li></ul>`,
     problems: [
       { id: 'cs-u2-linear-worst', title: 'Linear search worst case', kind: 'numeric',
-        gen(r){ const n=r.pick([5,8,10,20,50]); return {prompt:String.raw`Worst-case comparisons to find an item in an unsorted list of $${n}$ (linear search)?`,answers:[ans('c','c',n,'')],hints:['May check every item'],solution:String.raw`<p>${n}</p>`}; } },
+        gen(r){ const n=r.pick([5,8,10,20,50]); return {prompt:String.raw`Using linear search on an unsorted list of ${n}$ items, how many comparisons are needed in the worst case? Enter the number.`,answers:[ans('c','c',n,'')],hints:['May check every item'],solution:String.raw`<p>${n}</p>`}; } },
       { id: 'cs-u2-binary', title: 'Binary search steps (approx)', kind: 'numeric',
-        gen(r){ const n=r.pick([8,16,32,64,128]); const steps=Math.ceil(Math.log2(n)); return {prompt:String.raw`About how many steps for binary search on $${n}$ sorted items? (ceil of $\\log_2 n$)`,answers:[ans('s','s',steps,'')],hints:['ceil(log2 n)'],solution:String.raw`<p>${steps}</p>`}; } },
+        gen(r){ const n=r.pick([8,16,32,64,128]); const steps=Math.ceil(Math.log2(n)); return {prompt:String.raw`About how many steps does binary search need on ${n}$ sorted items? Enter $\\lceil\\log_2 n\\rceil$.`,answers:[ans('s','s',steps,'')],hints:['ceil(log2 n)'],solution:String.raw`<p>${steps}</p>`}; } },
       { id: 'cs-u2-mc', title: 'Concepts: algorithms', kind: 'mc',
         gen: mcPool([
           {q:'Binary search requires…',correct:'sorted (ordered) data',wrong:['random data only','no comparisons','infinite memory'],why:'Halving assumes order.'},
           {q:'An algorithm that never stops is…',correct:'incorrect as an algorithm (must terminate)',wrong:['always optimal','called a compiler','fine if fast at first'],why:'Termination required.'},
         ]) },
       { id: 'cs-u2-swap', title: 'Swaps to sort 2 items', kind: 'numeric',
-        gen(r){ return {prompt:String.raw`List $[2,1]$. Minimum swaps of adjacent items to sort ascending?`,answers:[ans('s','s',1,'')],hints:['One swap'],solution:String.raw`<p>1</p>`}; } },
+        gen(r){ return {prompt:String.raw`The list $[2,1]$ should be sorted ascending using adjacent swaps. What is the minimum number of swaps? Enter that number.`,answers:[ans('s','s',1,'')],hints:['One swap'],solution:String.raw`<p>1</p>`}; } },
     ],
   },
   {
@@ -64,16 +64,16 @@ module.exports = [
 <ul class="takeaways"><li>Types prevent nonsense operations.</li><li>0-based: last index = length−1.</li><li>APIs hide representation.</li></ul>`,
     problems: [
       { id: 'cs-u3-last-index', title: 'Last index (0-based)', kind: 'numeric',
-        gen(r){ const n=r.int(3,20); return {prompt:String.raw`A 0-based list holds $${n}$ items. Index of the last item?`,answers:[ans('i','i',n-1,'')],hints:['n−1'],solution:String.raw`<p>${n-1}</p>`}; } },
+        gen(r){ const n=r.int(3,20); return {prompt:String.raw`A 0-based list holds ${n}$ items. What is the index of the last item? Enter the index.`,answers:[ans('i','i',n-1,'')],hints:['n−1'],solution:String.raw`<p>${n-1}</p>`}; } },
       { id: 'cs-u3-bytes-ascii', title: 'ASCII-ish storage', kind: 'numeric',
-        gen(r){ const n=r.int(4,12); return {prompt:String.raw`Store $${n}$ characters at 1 byte each. Bytes needed?`,answers:[ans('b','b',n,'')],hints:['1 each'],solution:String.raw`<p>${n}</p>`}; } },
+        gen(r){ const n=r.int(4,12); return {prompt:String.raw`You store ${n}$ characters using 1 byte each. How many bytes are needed? Enter the byte count.`,answers:[ans('b','b',n,'')],hints:['1 each'],solution:String.raw`<p>${n}</p>`}; } },
       { id: 'cs-u3-mc', title: 'Concepts: data', kind: 'mc',
         gen: mcPool([
           {q:'A map/dictionary is best when…',correct:'you look up values by a key',wrong:['you only ever need the middle of a sorted array by position and nothing else','types are illegal','clocks are forbidden'],why:'Key→value.'},
           {q:'An API contract…',correct:'tells callers what they can rely on without internals',wrong:['is only comments nobody reads by law','requires assembly','forbids functions'],why:'Interface.'},
         ]) },
       { id: 'cs-u3-len', title: 'Length after appends', kind: 'numeric',
-        gen(r){ const start=r.int(0,5),add=r.int(2,8); return {prompt:String.raw`List starts with $${start}$ items; append $${add}$ more. Length?`,answers:[ans('L','L',start+add,'')],hints:['Add'],solution:String.raw`<p>${start+add}</p>`}; } },
+        gen(r){ const start=r.int(0,5),add=r.int(2,8); return {prompt:String.raw`A list starts with ${start}$ items and then ${add}$ items are appended. What is the new length? Enter the length.`,answers:[ans('L','L',start+add,'')],hints:['Add'],solution:String.raw`<p>${start+add}</p>`}; } },
     ],
   },
   {
@@ -86,16 +86,16 @@ module.exports = [
 <ul class="takeaways"><li>Ask: if $n$ doubles, what happens to time?</li><li>$O(n^2)$ hurts fast.</li><li>Prefer better growth when $n$ is huge.</li></ul>`,
     problems: [
       { id: 'cs-u4-nested', title: 'Nested loop iterations', kind: 'numeric',
-        gen(r){ const n=r.pick([3,4,5,6,8,10]); return {prompt:String.raw`Outer and inner loops each run $${n}$ times. Total inner-body runs?`,answers:[ans('t','t',n*n,'')],hints:['n×n'],solution:String.raw`<p>${n*n}</p>`}; } },
+        gen(r){ const n=r.pick([3,4,5,6,8,10]); return {prompt:String.raw`An outer loop and an inner loop each run ${n}$ times. How many times does the inner body execute? Enter the count.`,answers:[ans('t','t',n*n,'')],hints:['n×n'],solution:String.raw`<p>${n*n}</p>`}; } },
       { id: 'cs-u4-double', title: 'Quadratic when n doubles', kind: 'numeric',
-        gen(r){ const t=r.pick([10,20,50]); return {prompt:String.raw`An $O(n^2)$ algorithm takes $${t}$ ms at size $n$. Rough ms at size $2n$?`,answers:[ans('t','t',4*t,'ms')],hints:['(2n)² = 4n²'],solution:String.raw`<p>${4*t} ms</p>`}; } },
+        gen(r){ const t=r.pick([10,20,50]); return {prompt:String.raw`An $O(n^2)$ algorithm takes ${t}$ ms for size $n$. About how many ms for size $2n$? Enter the estimate.`,answers:[ans('t','t',4*t,'ms')],hints:['(2n)² = 4n²'],solution:String.raw`<p>${4*t} ms</p>`}; } },
       { id: 'cs-u4-mc', title: 'Concepts: complexity', kind: 'mc',
         gen: mcPool([
           {q:'Binary search growth is…',correct:'O(log n)',wrong:['O(n²)','O(2^n) always','O(1) only'],why:'Halving.'},
           {q:'O(1) means…',correct:'time stays roughly constant as n grows',wrong:['instant forever on any machine','n²','never uses memory'],why:'Constant.'},
         ]) },
       { id: 'cs-u4-linear-double', title: 'Linear when n doubles', kind: 'numeric',
-        gen(r){ const t=r.pick([12,25,40]); return {prompt:String.raw`$O(n)$ takes $${t}$ ms at size $n$. Rough ms at $2n$?`,answers:[ans('t','t',2*t,'ms')],hints:['Doubles'],solution:String.raw`<p>${2*t}</p>`}; } },
+        gen(r){ const t=r.pick([12,25,40]); return {prompt:String.raw`An $O(n)$ algorithm takes ${t}$ ms for size $n$. About how many ms for size $2n$? Enter the estimate.`,answers:[ans('t','t',2*t,'ms')],hints:['Doubles'],solution:String.raw`<p>${2*t}</p>`}; } },
     ],
   },
   {
@@ -109,9 +109,9 @@ module.exports = [
 <ul class="takeaways"><li>Reproduce first.</li><li>Tests document expected behavior.</li><li>Logic bugs are sneaky — assert often.</li></ul>`,
     problems: [
       { id: 'cs-u5-offby', title: 'Off-by-one length', kind: 'numeric',
-        gen(r){ const n=r.int(5,15); return {prompt:String.raw`Loop uses indices $0..${n}$ inclusive on a 0-based list of length $${n}$. How many invalid index hits? (count indices ≥ length)`,answers:[ans('k','k',1,'')],hints:['Index n is out of range'],solution:String.raw`<p>Index ${n} invalid → 1</p>`}; } },
+        gen(r){ const n=r.int(5,15); return {prompt:String.raw`A loop uses indices $0$ through ${n}$ inclusive on a 0-based list of length ${n}$. How many of those indices are invalid (≥ length)? Enter the count.`,answers:[ans('k','k',1,'')],hints:['Index n is out of range'],solution:String.raw`<p>Index ${n} invalid → 1</p>`}; } },
       { id: 'cs-u5-tests', title: 'Test cases count', kind: 'numeric',
-        gen(r){ const edge=r.int(2,4),norm=r.int(2,5); return {prompt:String.raw`You plan $${edge}$ edge tests and $${norm}$ normal tests. Total test cases?`,answers:[ans('t','t',edge+norm,'')],hints:['Add'],solution:String.raw`<p>${edge+norm}</p>`}; } },
+        gen(r){ const edge=r.int(2,4),norm=r.int(2,5); return {prompt:String.raw`You plan ${edge}$ edge-case tests and ${norm}$ normal tests. How many test cases total? Enter the total.`,answers:[ans('t','t',edge+norm,'')],hints:['Add'],solution:String.raw`<p>${edge+norm}</p>`}; } },
       { id: 'cs-u5-mc', title: 'Concepts: debug & test', kind: 'mc',
         gen: mcPool([
           {q:'A logic error…',correct:'runs but produces wrong results',wrong:['always prevents compiling','is only a hardware fault','means the keyboard is broken'],why:'Silent wrong.'},
@@ -130,7 +130,7 @@ module.exports = [
 <ul class="takeaways"><li>Client/server + packets.</li><li>HTTPS ≠ “site is honest,” but it encrypts the pipe.</li><li>Unique passwords; skepticism for urgent secret requests.</li></ul>`,
     problems: [
       { id: 'cs-u6-packets', title: 'Packet count (toy)', kind: 'numeric',
-        gen(r){ const size=r.pick([3000,5000,8000,10000]),mtu=r.pick([1000,1500]); const n=Math.ceil(size/mtu); return {prompt:String.raw`Send $${size}$ bytes in chunks of up to $${mtu}$ bytes. Min packets?`,answers:[ans('p','p',n,'')],hints:['ceil(size/mtu)'],solution:String.raw`<p>${n}</p>`}; } },
+        gen(r){ const size=r.pick([3000,5000,8000,10000]),mtu=r.pick([1000,1500]); const n=Math.ceil(size/mtu); return {prompt:String.raw`You must send ${size}$ bytes using packets of at most ${mtu}$ bytes each. What is the minimum number of packets? Enter the count.`,answers:[ans('p','p',n,'')],hints:['ceil(size/mtu)'],solution:String.raw`<p>${n}</p>`}; } },
       { id: 'cs-u6-mc', title: 'Concepts: internet & safety', kind: 'mc',
         gen: mcPool([
           {q:'HTTPS mainly…',correct:'encrypts data in transit between client and server',wrong:['guarantees the company is ethical','makes PDFs','removes the need for passwords forever'],why:'Transport security.'},
@@ -138,7 +138,7 @@ module.exports = [
           {q:'A good password habit…',correct:'long, unique per site, stored in a manager when possible',wrong:['reuse one word everywhere','email it to strangers','share on public Wi‑Fi stickers'],why:'Hygiene.'},
         ]) },
       { id: 'cs-u6-bandwidth', title: 'Transfer time', kind: 'numeric',
-        gen(r){ const mb=r.pick([10,20,50]),mbps=r.pick([5,10,25]); const sec=mb*8/mbps; return {prompt:String.raw`$${mb}$ megabytes at $${mbps}$ megabits/s. Seconds? (1 byte = 8 bits)`,answers:[ans('t','t',sec,'s')],hints:['bits = MB×8; ÷ Mbps'],solution:String.raw`<p>${fmt(sec)} s</p>`}; } },
+        gen(r){ const mb=r.pick([10,20,50]),mbps=r.pick([5,10,25]); const sec=mb*8/mbps; return {prompt:String.raw`Transfer ${mb}$ megabytes at ${mbps}$ megabits per second. How many seconds does it take? (1 byte = 8 bits). Enter seconds.`,answers:[ans('t','t',sec,'s')],hints:['bits = MB×8; ÷ Mbps'],solution:String.raw`<p>${fmt(sec)} s</p>`}; } },
     ],
   },
 ];
