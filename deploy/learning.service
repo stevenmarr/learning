@@ -1,0 +1,17 @@
+[Unit]
+Description=Marr Learning Hub
+After=network.target
+
+[Service]
+Type=simple
+User=learning
+Group=learning
+WorkingDirectory=/opt/learning
+EnvironmentFile=/opt/learning/.env
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
