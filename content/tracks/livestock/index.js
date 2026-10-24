@@ -301,6 +301,12 @@ const units = [
           { q: 'Before selling eggs in Texas…', correct: 'Verify current state/local rules yourself — this course does not invent legal advice', wrong: ['Assume this lesson’s silence means no rules exist', 'Invent a license number', 'Skip cleaning and labeling thoughts entirely without checking'], why: 'Legal flag is intentional.' },
           { q: 'Collecting eggs regularly…', correct: 'Reduces dirt, cracks, and broodiness problems', wrong: ['Is only for show birds', 'Makes oyster shell unnecessary', 'Replaces night lockup'], why: 'Daily habit.' },
         ]) },
+      { id: 'liv-u6-collect', title: 'Egg handling habits', kind: 'mc',
+        gen: mcPool([
+          { q: 'Collecting eggs regularly helps…', correct: 'reduce breakage, broodiness pressure, and dirty/lost eggs', wrong: ['raise invented market prices automatically', 'replace the need for clean nesting areas', 'make roosters lay'], why: 'Fresh collection is husbandry, not a price claim.' },
+          { q: 'A dirty nest box usually means you should…', correct: 'clean/refresh bedding and check for broken eggs or wet spots', wrong: ['publish a phone number', 'count a made-up flock size as the fix', 'stop providing water'], why: 'Hygiene and observation.' },
+        ]) },
+      
     ],
   },
   {
@@ -346,6 +352,12 @@ const units = [
           { q: 'This course’s rule on wormers/vaccines?', correct: 'Only as vet/extension teach — no DIY drug recipes', wrong: ['Mix random cattle pour-ons for goats from memory', 'Dose by Facebook poll', 'Skip all quarantine forever'], why: 'Safety and stewardship.' },
           { q: 'New or sick animals should be…', correct: 'Quarantined when practical', wrong: ['Mixed immediately with neonates', 'Hidden from observation', 'Given unlabeled powders'], why: 'Biosecurity.' },
         ]) },
+      { id: 'liv-u7-vet', title: 'When to call for help', kind: 'mc',
+        gen: mcPool([
+          { q: 'Withdrawal times and labeled use matter because…', correct: 'food safety and legal/responsible drug use depend on them', wrong: ['they set the farm’s public phone tree', 'they invent headcounts', 'parasites enjoy paperwork'], why: 'Stewardship and compliance — no invented prices.' },
+          { q: 'Best early response to an animal that is off-feed and dull…', correct: 'observe vitals/behavior, isolate if needed, and get experienced/vet guidance rather than guessing strong drugs', wrong: ['post a sale price first', 'ignore for a month on purpose', 'share someone else’s private phone number as content'], why: 'Assessment before treatment.' },
+        ]) },
+      
     ],
   },
   {
@@ -386,6 +398,12 @@ const units = [
         gen: mcPool([
           { q: 'Goat clearing quotes should…', correct: 'Stay realistic on time/scope and mention fencing needs', wrong: ['Guarantee instant bare soil always', 'Ignore predators and water', 'Promise copper cures brush'], why: 'Underpromise; overdeliver.' },
         ]) },
+      { id: 'liv-u8-honesty', title: 'Sales honesty check', kind: 'mc',
+        gen: mcPool([
+          { q: 'Honest livestock sales emphasize…', correct: 'accurate descriptions of health, temperament, and known issues', wrong: ['invented phone numbers in lessons', 'made-up herd headcounts as curriculum facts', 'fake market prices presented as farm data'], why: 'Ethics over hype; this course does not invent farm commercial figures.' },
+          { q: 'If you do not know an answer a buyer asks…', correct: 'say you do not know and offer to find out', wrong: ['invent a confident number', 'guess a phone contact for someone else', 'change the subject to headcount bragging'], why: 'Integrity.' },
+        ]) },
+      
     ],
   },
   {

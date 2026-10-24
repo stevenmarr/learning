@@ -225,9 +225,14 @@ $$\\frac{d}{dx}x^n = n x^{n-1}$$
     level: 'calc2',
     lesson: String.raw`
 <h2>Why this unit matters</h2>
-<p>The integral adds up little pieces. $\\int_a^b f(x)\\,dx$ reads “integral from a to b of f of x dx” — signed area / net accumulation. Fundamental Theorem: if $F'=f$, then $\\int_a^b f=F(b)-F(a)$.</p>
-$$\\int x^n\\,dx = \\frac{x^{n+1}}{n+1}+C \\quad (n\\neq -1)$$
-<ul class="takeaways"><li>Integral accumulates.</li><li>FTC links derivatives and integrals.</li><li>$dx$ marks the variable.</li></ul>`,
+<p>The integral adds up little pieces. $\\int_a^b f(x)\\,dx$ reads “integral from a to b of f of x dee-x” — signed area / net accumulation. If position is the integral of velocity, charge is the integral of current.</p>
+<h2>Antiderivatives</h2>
+$$\\int x^n\\,dx = \\frac{x^{n+1}}{n+1}+C \\quad (n\\neq -1), \\qquad \\int e^{kx}\\,dx = \\frac{1}{k}e^{kx}+C$$
+<p><strong>Fundamental Theorem:</strong> if $F'=f$, then $\\int_a^b f=F(b)-F(a)$. The $+C$ cancels on a definite integral.</p>
+<div class="example"><h3>Worked example</h3>
+<p>$\\int_1^3 x\\,dx = \\frac12 x^2\\big|_1^3 = \\frac92-\\frac12=4$. Net area under $y=x$ from 1 to 3.</p></div>
+<div class="tip"><strong>Sanity check:</strong> If $f\\ge 0$ on $[a,b]$, the definite integral should be $\\ge 0$.</div>
+<ul class="takeaways"><li>Integral accumulates; derivative rates.</li><li>FTC: evaluate antiderivative at endpoints.</li><li>$dx$ marks the variable of integration.</li></ul>`,
     problems: [
       { id: 'math-u7-anti', title: 'Antiderivative coefficient', kind: 'numeric',
         gen(r) {
@@ -240,6 +245,12 @@ $$\\int x^n\\,dx = \\frac{x^{n+1}}{n+1}+C \\quad (n\\neq -1)$$
           const a = r.int(0, 2), b = a + r.int(2, 5);
           const val = 0.5 * (b * b - a * a);
           return { prompt: String.raw`$\\int_{${a}}^{${b}} x\\,dx=?$`, answers: [ans('I', 'I', val, '')], hints: [String.raw`$\\int x=x^2/2$.`], solution: String.raw`<p>$I=${fmt(val)}$</p>` };
+        } },
+      { id: 'math-u7-const', title: 'Integral of constant', kind: 'numeric',
+        gen(r) {
+          const c = r.int(2, 9), a = r.int(0, 3), b = a + r.int(2, 6);
+          const val = c * (b - a);
+          return { prompt: String.raw`$\int_{${a}}^{${b}} ${c}\,dx=?$`, answers: [ans('I', 'I', val, '')], hints: ['Constant × width.'], solution: String.raw`<p>$I=${val}$</p>` };
         } },
       { id: 'math-u7-mc', title: 'Concept check: integrals', kind: 'mc',
         gen: mcPool([
@@ -255,9 +266,12 @@ $$\\int x^n\\,dx = \\frac{x^{n+1}}{n+1}+C \\quad (n\\neq -1)$$
     level: 'calc2',
     lesson: String.raw`
 <h2>Why this unit matters</h2>
-<p><strong>u-sub</strong> is the chain rule backwards. Average value on $[a,b]$:</p>
+<p><strong>u-substitution</strong> is the chain rule backwards: if you see $g'(x)$ next to $f(g(x))$, set $u=g(x)$ so $du=g'(x)\\,dx$. Average value on $[a,b]$ is the constant height with the same area:</p>
 $$f_{\\mathrm{avg}}=\\frac{1}{b-a}\\int_a^b f(x)\\,dx$$
-<ul class="takeaways"><li>Pick $u$ = inside of a composition.</li><li>Average value = integral / width.</li></ul>`,
+<p>Net change of $F$ is $\\int_a^b F'(x)\\,dx$. Displacement vs distance: watch signs.</p>
+<div class="example"><h3>Worked example</h3>
+<p>$\\int 2x(x^2+1)^4\\,dx$: $u=x^2+1$, $du=2x\\,dx$ → $\\int u^4\\,du=u^5/5+C$. Average of $f(x)=x$ on $[0,4]$ is $2$.</p></div>
+<ul class="takeaways"><li>Pick $u$ = inside of a composition.</li><li>Average value = integral / width.</li><li>$\\int_a^a f=0$ (zero width).</li></ul>`,
     problems: [
       { id: 'math-u8-avg', title: 'Average value of linear f', kind: 'numeric',
         gen(r) {
@@ -270,6 +284,11 @@ $$f_{\\mathrm{avg}}=\\frac{1}{b-a}\\int_a^b f(x)\\,dx$$
           const n = r.int(2, 5);
           // ∫ 2x (x^2+1)^n dx → u=x^2+1, result (u^{n+1})/(n+1); ask n+1
           return { prompt: String.raw`For $\\int 2x(x^2+1)^{${n}}\\,dx$, with $u=x^2+1$, the antiderivative is $\\frac{u^{k}}{k}+C$. What is $k$?`, answers: [ans('k', 'k', n + 1, '')], hints: ['Power increases by 1.'], solution: String.raw`<p>$k=${n+1}$</p>` };
+        } },
+      { id: 'math-u8-net', title: 'Net change from derivative', kind: 'numeric',
+        gen(r) {
+          const v = r.int(2, 6), b = r.pick([3, 4, 5]);
+          return { prompt: String.raw`If $s'(t)=${v}$ (constant), net change in $s$ from $t=0$ to $t=${b}$?`, answers: [ans('d', '\\Delta s', v * b, '')], hints: ['Integral of constant rate.'], solution: String.raw`<p>${v*b}</p>` };
         } },
       { id: 'math-u8-mc', title: 'Concept check: calc2 tools', kind: 'mc',
         gen: mcPool([
@@ -286,9 +305,12 @@ $$f_{\\mathrm{avg}}=\\frac{1}{b-a}\\int_a^b f(x)\\,dx$$
     level: 'calc3',
     lesson: String.raw`
 <h2>Why this unit matters</h2>
-<p>Statics already used $\\mathbf i,\\mathbf j,\\mathbf k$. Calc 3 extends this: lines, planes, and vector-valued paths $\\mathbf r(t)$.</p>
+<p>Statics already used $\\mathbf i,\\mathbf j,\\mathbf k$. Calc 3 extends this to lines, planes, and vector-valued paths $\\mathbf r(t)=\\langle x(t),y(t),z(t)\\rangle$. Velocity is $\\mathbf r'(t)$; speed is $|\\mathbf r'(t)|$.</p>
 $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\cos\\theta$$
-<ul class="takeaways"><li>Dot product → angles and projections.</li><li>Position vector $\\mathbf r(t)$ traces a path.</li></ul>`,
+<p>Orthogonal vectors have dot product 0. A unit vector is $\\hat{\\mathbf u}=\\mathbf u/|\\mathbf u|$.</p>
+<div class="example"><h3>Worked example</h3>
+<p>$\\langle 1,2,2\\rangle\\cdot\\langle 2,-1,0\\rangle=2-2+0=0$ → perpendicular. Magnitude $|\\langle 3,4\\rangle|=5$.</p></div>
+<ul class="takeaways"><li>Dot product → angles and projections.</li><li>$\\mathbf r(t)$ traces a curve.</li><li>Unit vector has length 1.</li></ul>`,
     problems: [
       { id: 'math-u9-dot', title: 'Dot product', kind: 'numeric',
         gen(r) {
@@ -306,6 +328,13 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
           const mag = Math.hypot(A, B);
           return { prompt: String.raw`Magnitude of $\\langle ${A},${B}\\rangle$?`, answers: [ans('m', '|v|', mag, '')], hints: [String.raw`$\\sqrt{x^2+y^2}$.`], solution: String.raw`<p>${fmt(mag)}</p>` };
         } },
+      { id: 'math-u9-unit', title: 'Unit vector x-component', kind: 'numeric',
+        gen(r) {
+          const pairs = [[3,4],[5,12],[8,15]];
+          const [A,B] = r.pick(pairs);
+          const ux = A / Math.hypot(A, B);
+          return { prompt: String.raw`Unit vector in direction $\langle ${A},${B}\rangle$. Enter the $x$-component.`, answers: [ans('ux', 'u_x', ux, '')], hints: ['Divide by magnitude.'], solution: String.raw`<p>$u_x=${fmt(ux)}$</p>` };
+        } },
       { id: 'math-u9-mc', title: 'Concept check: vectors', kind: 'mc',
         gen: mcPool([
           { q: 'a·b = 0 means…', correct: 'vectors are perpendicular (if nonzero)', wrong: ['parallel always', 'same length', 'zero vectors only'], why: 'cos θ = 0 → 90°.' },
@@ -320,10 +349,11 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
     level: 'calc3',
     lesson: String.raw`
 <h2>Why this unit matters</h2>
-<p>For $z=f(x,y)$, the partial $\\partial f/\\partial x$ (read “partial f partial x”) differentiates treating $y$ as constant. It is the slope of the surface in the $x$-direction.</p>
+<p>For $z=f(x,y)$, the partial $\\partial f/\\partial x$ (read “partial f partial x”) differentiates treating $y$ as constant — slope of the surface in the $x$-direction. Likewise $f_y$ holds $x$ fixed. The <strong>gradient</strong> $\\nabla f=\\langle f_x,f_y\\rangle$ points toward steepest increase.</p>
 <div class="example"><h3>Worked example</h3>
-<p>$f(x,y)=x^2 y$: $f_x=2xy$, $f_y=x^2$.</p></div>
-<ul class="takeaways"><li>Partial = one variable at a time.</li><li>Notation $\\partial$ signals multivariable.</li></ul>`,
+<p>$f(x,y)=x^2 y+3y$: $f_x=2xy$, $f_y=x^2+3$. At $(1,2)$: $f_x=4$, $f_y=4$.</p></div>
+<div class="tip"><strong>Check:</strong> each partial is “output per that input.”</div>
+<ul class="takeaways"><li>Partial = one variable at a time.</li><li>$\\partial$ signals multivariable.</li><li>Gradient packs the first partials.</li></ul>`,
     problems: [
       { id: 'math-u10-fx', title: 'Partial fx', kind: 'numeric',
         gen(r) {
@@ -337,6 +367,11 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
           const x = r.int(1, 4), y = r.int(1, 4);
           // f = x y^2, fy = 2 x y
           return { prompt: String.raw`$f(x,y)=x y^2$. Find $f_y(${x},${y})$.`, answers: [ans('fy', 'f_y', 2 * x * y, '')], hints: ['Treat x constant.'], solution: String.raw`<p>${2*x*y}</p>` };
+        } },
+      { id: 'math-u10-eval', title: 'Evaluate f(x,y)', kind: 'numeric',
+        gen(r) {
+          const x = r.int(1, 4), y = r.int(1, 4);
+          return { prompt: String.raw`$f(x,y)=3x+2y$. Find $f(${x},${y})$.`, answers: [ans('f', 'f', 3*x+2*y, '')], hints: ['Substitute.'], solution: String.raw`<p>${3*x+2*y}</p>` };
         } },
       { id: 'math-u10-mc', title: 'Concept check: partials', kind: 'mc',
         gen: mcPool([
@@ -353,10 +388,11 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
     level: 'de',
     lesson: String.raw`
 <h2>Why this unit matters</h2>
-<p>A <strong>differential equation</strong> relates a function to its derivatives. Example: $y'=ky$ models exponential growth/decay. Solution $y=y_0 e^{kt}$.</p>
-<p><strong>Separable:</strong> $dy/dx=g(x)h(y)$ → $\\int dy/h = \\int g\\,dx$.</p>
-<div class="tip"><strong>Reading $y'$.</strong> Same as $dy/dx$ — derivative of $y$ with respect to the independent variable (often $x$ or $t$).</div>
-<ul class="takeaways"><li>DE = model for rates.</li><li>$y'=ky$ → exponentials.</li><li>Separate variables when possible.</li></ul>`,
+<p>A <strong>differential equation</strong> relates a function to its derivatives. Cooling, populations, RC circuits, and loans all produce first-order models. Prototype: $y'=ky$ has solution $y=y_0 e^{kt}$.</p>
+<p><strong>Separable:</strong> $\\frac{dy}{dx}=g(x)h(y)$ → $\\int \\frac{dy}{h(y)}=\\int g(x)\\,dx$ (+ constant). Apply the initial condition last to fix $C$.</p>
+<div class="example"><h3>Worked example</h3>
+<p>$y'=0.2y$, $y(0)=50$: $y=50e^{0.2t}$. Half-life: each half-life multiplies quantity by $1/2$.</p></div>
+<ul class="takeaways"><li>DE = model for rates.</li><li>$y'=ky$ → exponentials.</li><li>Separate, integrate, apply IC.</li></ul>`,
     problems: [
       { id: 'math-u11-exp', title: 'Exponential growth value', kind: 'numeric',
         gen(r) {
@@ -369,6 +405,12 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
           const y0 = r.pick([80, 100, 200]), n = r.pick([1, 2, 3]);
           const y = y0 / (2 ** n);
           return { prompt: String.raw`A quantity starts at $${y0}$ and halves every half-life. After $${n}$ half-lives, how much remains?`, answers: [ans('y', 'y', y, '')], hints: ['Divide by 2 each half-life.'], solution: String.raw`<p>$y=${y}$</p>` };
+        } },
+      { id: 'math-u11-k', title: 'Growth constant from doubling', kind: 'numeric',
+        gen(r) {
+          const T = r.pick([2, 4, 5, 10]);
+          const k = Math.LN2 / T;
+          return { prompt: String.raw`$y=y_0 e^{kt}$ doubles when $t=${T}$. Find $k=\ln 2 / T$.`, answers: [ans('k', 'k', k, '')], hints: ['k = ln2 / doubling time.'], solution: String.raw`<p>$k=${fmt(k)}$</p>` };
         } },
       { id: 'math-u11-mc', title: 'Concept check: first-order DE', kind: 'mc',
         gen: mcPool([
@@ -384,8 +426,10 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
     level: 'de',
     lesson: String.raw`
 <h2>Why this unit matters</h2>
-<p>Mass-spring and RLC circuits lead to $y''+by'+cy=0$. Guess $y=e^{rt}$; the <strong>characteristic equation</strong> $r^2+br+c=0$ decides over/under/critical damping.</p>
-<ul class="takeaways"><li>Characteristic equation from exponential trial.</li><li>Two real roots → overdamped sum of exponentials.</li><li>Complex roots → oscillation (underdamped).</li></ul>`,
+<p>Mass-spring and series RLC circuits lead to $y''+by'+cy=0$. Try $y=e^{rt}$; the <strong>characteristic equation</strong> $r^2+br+c=0$ decides the shape. Discriminant $D=b^2-4c$: $D>0$ overdamped (two real roots), $D=0$ critically damped, $D<0$ underdamped (oscillation × decay).</p>
+<div class="example"><h3>Worked example</h3>
+<p>$y''+5y'+4y=0$ → $(r+4)(r+1)=0$ → $y=c_1 e^{-4t}+c_2 e^{-t}$ (overdamped). $y''+2y'+5y=0$ has $D=4-20<0$ → underdamped.</p></div>
+<ul class="takeaways"><li>Characteristic equation from $e^{rt}$ trial.</li><li>Two real roots → overdamped.</li><li>Complex roots → oscillation (underdamped).</li></ul>`,
     problems: [
       { id: 'math-u12-char', title: 'Characteristic root sum', kind: 'numeric',
         gen(r) {
@@ -403,6 +447,11 @@ $$\\mathbf a\\cdot\\mathbf b = a_xb_x+a_yb_y+a_zb_z = |\\mathbf a||\\mathbf b|\\
           else if (kind === 'crit') { b = 4; c = 4; code = 0; } // 16-16=0
           else { b = 2; c = 5; code = -1; } // 4-20<0
           return { prompt: String.raw`For $y''+${b}y'+${c}y=0$, enter $1$ if overdamped (two real roots), $0$ if critically damped, $-1$ if underdamped (complex roots).`, answers: [ans('k', 'k', code, '')], hints: [String.raw`Look at $b^2-4c$.`], solution: String.raw`<p>Discriminant ${b*b-4*c} → code ${code}</p>` };
+        } },
+      { id: 'math-u12-product', title: 'Product of characteristic roots', kind: 'numeric',
+        gen(r) {
+          const r1 = r.int(-6, -1), r2 = r.int(-6, -1);
+          return { prompt: String.raw`Roots $r=${r1}$ and $r=${r2}$. Product $r_1 r_2$?`, answers: [ans('p', 'p', r1 * r2, '')], hints: ['Multiply.'], solution: String.raw`<p>${r1*r2}</p>` };
         } },
       { id: 'math-u12-mc', title: 'Concept check: 2nd order DE', kind: 'mc',
         gen: mcPool([

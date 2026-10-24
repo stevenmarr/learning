@@ -26,19 +26,19 @@ const TRACKS = [
   },
   {
     id: 'circuits', slug: 'circuits', title: 'Electrical Circuits', short: 'Circuits',
-    blurb: 'Voltage, current, Ohm, Kirchhoff, and first-order RC — intuition before the lab.',
+    blurb: 'Ohm, series/parallel, Kirchhoff, RC, Thévenin, and AC RMS — intuition before the lab.',
     accent: '#6ec6ff', icon: '⚡', order: 3, status: 'live', audience: 'andrew',
     hasGame: true, hasToolkit: false, tags: ['engineering', 'electrical'],
   },
   {
     id: 'digital', slug: 'digital', title: 'Digital Design', short: 'Digital',
-    blurb: 'Binary, Boolean algebra, gates, combinational logic, and sequential circuits.',
+    blurb: 'Binary through hex/two’s complement, gates, adders/muxes, flip-flops, counters, and FSM timing.',
     accent: '#9d8cff', icon: '01', order: 4, status: 'live', audience: 'andrew',
     hasGame: true, hasToolkit: false, tags: ['engineering', 'digital'],
   },
   {
     id: 'cs', slug: 'cs', title: 'CS Principles', short: 'CS 101',
-    blurb: 'Computational thinking — algorithms, data, abstraction, complexity — principles over syntax.',
+    blurb: 'Computational thinking, algorithms, data, complexity, debugging/testing, and internet/cyber awareness.',
     accent: '#7dcea0', icon: '{}', order: 5, status: 'live', audience: 'andrew',
     hasGame: true, hasToolkit: false, tags: ['cs'],
   },
@@ -68,7 +68,7 @@ const TRACKS = [
   },
   {
     id: 'junior', slug: 'junior', title: 'Junior-High Supplemental', short: 'Junior High',
-    blurb: 'Math & science boosters for middle school — warm, game-forward; Colester themes can fold in later.',
+    blurb: 'Fractions, percent, integers, geometry, science habits, and rates — warm middle-school boosters.',
     accent: '#f5b041', icon: '★', order: 10, status: 'live', audience: 'nicole',
     hasGame: true, hasToolkit: false, tags: ['middle-school'],
   },
