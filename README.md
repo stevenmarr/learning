@@ -72,6 +72,8 @@ Open `http://127.0.0.1:3119/learning/`.
 
 ## Version
 
+**2.1.3** — Circuits U2–U6 full pedagogy arcs (goals, hook, intuition, formal, worked example, common mistakes); expanded practice pools.
+
 **2.1.2** — Fix paramedic next-question crash (`pickProblem` empty pool); plain `qty()` prompts (no leaked KaTeX); pedagogy pass on circuits U1, paramedic, chem/junior U1; audit in `docs/pedagogy-audit.md`.
 
 **2.1.1** — Accept fractions in numeric answers (e.g. `1/4`); clearer problem prompts; `scripts/ensure-users.js` for account setup.

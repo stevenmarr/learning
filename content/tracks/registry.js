@@ -26,7 +26,7 @@ const TRACKS = [
   },
   {
     id: 'circuits', slug: 'circuits', title: 'Electrical Circuits', short: 'Circuits',
-    blurb: 'Ohm, series/parallel, Kirchhoff, RC, Thévenin, and AC RMS — intuition before the lab.',
+    blurb: 'Ohm through AC RMS with full teachable lessons: series/parallel, Kirchhoff, RC, Thévenin, and sinusoids.',
     accent: '#6ec6ff', icon: '⚡', order: 3, status: 'live', audience: 'andrew',
     hasGame: true, hasToolkit: false, tags: ['engineering', 'electrical'],
   },

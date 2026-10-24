@@ -41,6 +41,21 @@ describe('pickProblem with single-type units', () => {
   });
 });
 
+describe('circuits U2–U6 pedagogy', () => {
+  it('every unit has the full teaching arc and ≥4 problem types', () => {
+    const eng = require('../content/tracks/circuits');
+    for (const u of eng.units) {
+      assert.ok(u.lesson.includes('Learning goals'), u.slug + ' goals');
+      assert.ok(u.lesson.includes('Hook'), u.slug + ' hook');
+      assert.ok(/Intuition/.test(u.lesson), u.slug + ' intuition');
+      assert.ok(/Formal/.test(u.lesson), u.slug + ' formal');
+      assert.ok(u.lesson.includes('Worked example'), u.slug + ' example');
+      assert.ok(u.lesson.includes('Common mistakes'), u.slug + ' mistakes');
+      assert.ok(u.problems.length >= 4, u.slug + ' pool size');
+    }
+  });
+});
+
 describe('fraction answers still accepted', () => {
   it('1/4 grades for 0.25', () => {
     assert.equal(checkNumeric(ans('m', 'm', 0.25, ''), '1/4').ok, true);

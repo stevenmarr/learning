@@ -29,6 +29,9 @@ Date: 2026-10-24 (America/Chicago). Audience: Andrew (advanced algebra / enginee
 - Andrew can handle pace; still add one plain-language paragraph before each formal block.
 
 ### Circuits — was worst offender for verbiage
+
+**Update (2.1.3):** Circuits U2–U6 rewritten to the same full arc as U1 (goals → hook → intuition → formal → worked example → common mistakes → practice). Practice pools expanded (30 problem types total) so next-question never empties.
+
 - U1 rewritten with full pedagogical arc; prompts use plain `qty()` (“1.9 A”, “38 V”).
 - U2–U6 lessons still shorter than U1; next pass should clone the U1 template.
 - Need diagram callouts (schematic sketches) long-term.
